@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
-
+using System.Collections.Concurrent;
 namespace Lab6
 {
     /// <summary>
@@ -36,8 +36,17 @@ namespace Lab6
         {
             Task.Run(() =>
             {
-                Bouncer bouncer = new Bouncer();
+                Dispatcher?.Invoke(() =>
+                {
+                    Random random = new Random();
+                    Thread.Sleep(random.Next(3000, 10000));
+                    var p = new Patron();
+                    GuestListBox.Items.Add(p.Behaviours());
+                });
+
+
             });
+                
         }
     }
 }
