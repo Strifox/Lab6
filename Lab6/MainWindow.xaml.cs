@@ -23,21 +23,28 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int increment = 0;
+
         public MainWindow()
         {
-            DispatcherTimer barTimer = new DispatcherTimer();
-            barTimer.Interval = TimeSpan.FromMinutes(2);
-            barTimer.Tick += BarTimerTick;
+           
             InitializeComponent();
-            barTimer.Start();
-            barTimer.Stop();
+            BarTimer();
         }
 
-       void BarTimerTick(object sender, EventArgs e)
+       private void BarTimer()
         {
-            MainWindow timerlabel = new MainWindow();
-            timerlabel.Content = DateTime.Now.ToLongTimeString();
+            DispatcherTimer barTimer = new DispatcherTimer();
+            barTimer.Interval = TimeSpan.FromSeconds(1);
+            barTimer.Tick += BarTimerTicker;
+            barTimer.Start();
 
+        }
+
+        private void BarTimerTicker(object sender, EventArgs e)
+        {
+            increment++;
+            TimerLabel.Content = increment.ToString();
         }
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
