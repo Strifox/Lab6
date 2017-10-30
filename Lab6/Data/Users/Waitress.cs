@@ -16,10 +16,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
 using System.Windows.Threading;
-using Lab6.Data;
-using Lab6.Data.Users;
 
-namespace Lab6.Data.Users
+namespace Lab6
 {
     public class Waitress : Agents
     {

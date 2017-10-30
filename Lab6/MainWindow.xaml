@@ -8,8 +8,7 @@
         Title="MainWindow" Height="533.237" Width="944.966">
     <Grid Margin="0,0,-8,-4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="619*"/>
         </Grid.ColumnDefinitions>
         <ListBox x:Name="BartenderListBox" HorizontalAlignment="Left" Height="207" Margin="10,60,0,0" VerticalAlignment="Top" Width="170"/>
         <ListBox x:Name="WaiterListBox" HorizontalAlignment="Left" Height="207" Margin="198,60,0,0" VerticalAlignment="Top" Width="170"/>
@@ -22,7 +21,7 @@
         <Button x:Name="BtnPauseGuests" Content="Pause" HorizontalAlignment="Left" Margin="386,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False"/>
         <Button x:Name="BtnOpenCloseBar" Content="Open" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="274" Height="70" Click="BtnOpenCloseBar_Click"/>
         <Button x:Name="BtnStop" Content="STOP" HorizontalAlignment="Left" Margin="386,366,0,0" VerticalAlignment="Top" Width="170" Height="70" IsEnabled="False"/>
-        <Label x:Name="TimerLabel" HorizontalAlignment="Left" Margin="30,254,-148,0" VerticalAlignment="Top" Width="118" Height="41" Grid.Column="1" Content="dfssg"/>
+        <Label x:Name="TimerLabel" HorizontalAlignment="Left" Margin="649,132,0,0" VerticalAlignment="Top" Width="118" Height="41" Content=""/>
 
     </Grid>
 </Window>
