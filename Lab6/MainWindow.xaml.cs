@@ -23,7 +23,6 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int increment = 0;
 
         public MainWindow()
         {
@@ -37,13 +36,13 @@ namespace Lab6
 
         }
 
+
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
             if (BtnOpenCloseBar.Content.ToString() == "Open")
             {
 
             }
-            TimerLabel.Content = DateTime.Now.ToLongTimeString();
             Task.Run(() =>
             {
                 Dispatcher?.Invoke(() =>
@@ -54,8 +53,8 @@ namespace Lab6
                     GuestListBox.Items.Add(p.Behaviours());
                 });
 
-
             });
+
 
         }
     }
