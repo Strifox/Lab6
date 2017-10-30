@@ -20,7 +20,7 @@
         <Button x:Name="BtnPauseBartender" Content="Pause" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False"/>
         <Button x:Name="BtnPauseWaiter" Content="Pause" HorizontalAlignment="Left" Margin="198,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False"/>
         <Button x:Name="BtnPauseGuests" Content="Pause" HorizontalAlignment="Left" Margin="386,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False"/>
-        <Button x:Name="BtnOpenCloseBar" Content="Open" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="274" Height="70" IsEnabled="False"/>
+        <Button x:Name="BtnOpenCloseBar" Content="Open" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="274" Height="70" Click="BtnOpenCloseBar_Click"/>
         <Button x:Name="BtnStop" Content="STOP" HorizontalAlignment="Left" Margin="386,366,0,0" VerticalAlignment="Top" Width="170" Height="70" IsEnabled="False"/>
 
     </Grid>

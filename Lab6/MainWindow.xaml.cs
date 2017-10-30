@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Timers;
 
 namespace Lab6
 {
@@ -28,6 +30,14 @@ namespace Lab6
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
+        {
+            Task.Run(() =>
+            {
+                Bouncer bouncer = new Bouncer();
+            });
         }
     }
 }

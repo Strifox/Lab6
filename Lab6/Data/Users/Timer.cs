@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 
-namespace Lab6
+namespace Lab6.Data.Users
 {
-    public class Waitress : Agents
+    public class Timer
     {
     }
 }
