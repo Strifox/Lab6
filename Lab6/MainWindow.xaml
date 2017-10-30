@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+        Title="MainWindow" Height="533.237" Width="944.966">
+    <Grid Margin="0,0,-8,-4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="649*"/>
+            <ColumnDefinition Width="296*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="BartenderListBox" HorizontalAlignment="Left" Height="207" Margin="10,60,0,0" VerticalAlignment="Top" Width="170"/>
+        <ListBox x:Name="WaiterListBox" HorizontalAlignment="Left" Height="207" Margin="198,60,0,0" VerticalAlignment="Top" Width="170"/>
+        <ListBox x:Name="GuestListBox" HorizontalAlignment="Left" Height="207" Margin="386,60,0,0" VerticalAlignment="Top" Width="170"/>
+        <Label x:Name="BartenderLabel" Content="Bartender" HorizontalAlignment="Left" Margin="54,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="WaiterLabel" Content="Waiter/Waitress" HorizontalAlignment="Left" Margin="232,29,0,0" VerticalAlignment="Top" Width="104" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="GuestLabel" Content="Guests" HorizontalAlignment="Left" Margin="432,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="BtnPauseBartender" Content="Pause" HorizontalAlignment="Left" Margin="10,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False"/>
+        <Button x:Name="BtnPauseWaiter" Content="Pause" HorizontalAlignment="Left" Margin="198,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False"/>
+        <Button x:Name="BtnPauseGuests" Content="Pause" HorizontalAlignment="Left" Margin="386,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False"/>
+        <Button x:Name="BtnOpenCloseBar" Content="Open" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="274" Height="70" IsEnabled="False"/>
+        <Button x:Name="BtnStop" Content="STOP" HorizontalAlignment="Left" Margin="386,366,0,0" VerticalAlignment="Top" Width="170" Height="70" IsEnabled="False"/>
+
     </Grid>
 </Window>
