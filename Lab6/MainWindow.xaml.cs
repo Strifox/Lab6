@@ -27,35 +27,21 @@ namespace Lab6
 
         public MainWindow()
         {
-           
+
             InitializeComponent();
-            BarTimer();
+            Time.BarTimer();
         }
 
-       private void BarTimer()
-        {
-            DispatcherTimer barTimer = new DispatcherTimer();
-            barTimer.Interval = TimeSpan.FromSeconds(1);
-            barTimer.Tick += BarTimerTicker;
-            barTimer.Start();
-
-        }
-
-        private void BarTimerTicker(object sender, EventArgs e)
-        {
-            increment++;
-            TimerLabel.Content = increment.ToString();
-        }
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
             if (BtnOpenCloseBar.Content.ToString() == "Open")
             {
-             
+
             }
             TimerLabel.Content = DateTime.Now.ToLongTimeString();
             Task.Run(() =>
@@ -70,7 +56,7 @@ namespace Lab6
 
 
             });
-                
+
         }
     }
 }
