@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
+using System.Windows.Threading;
+using Lab6.Data;
+using Lab6.Data.Users;
 
 namespace Lab6
 {
@@ -24,9 +27,20 @@ namespace Lab6
     {
         public MainWindow()
         {
-            InitializeComponent();
+           InitializeComponent();
         }
 
+        private static void BarTimer(int timer)
+        {
+            DispatcherTimer barTimer = new DispatcherTimer();
+            barTimer.Interval = new TimeSpan(timer);
+            barTimer.Tick -= BarTimerTick;
+        }
+        private class EventHantHandler BarTimerTick(Action<string> WriteToLabel)
+        {
+            WriteToLabel(DateTime.Now.ToLongTimeString());
+
+        }
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
@@ -34,6 +48,7 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
+            TimerLabel.Content = DateTime.Now.ToLongTimeString();
             Task.Run(() =>
             {
                 Bouncer bouncer = new Bouncer();
