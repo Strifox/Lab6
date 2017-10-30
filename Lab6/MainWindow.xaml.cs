@@ -30,17 +30,17 @@ namespace Lab6
            InitializeComponent();
         }
 
-        private static void BarTimer(int timer)
-        {
-            DispatcherTimer barTimer = new DispatcherTimer();
-            barTimer.Interval = new TimeSpan(timer);
-            barTimer.Tick -= BarTimerTick;
-        }
-        private class EventHantHandler BarTimerTick(Action<string> WriteToLabel)
-        {
-            WriteToLabel(DateTime.Now.ToLongTimeString());
+        //private static void BarTimer(int timer)
+        //{
+        //    DispatcherTimer barTimer = new DispatcherTimer();
+        //    barTimer.Interval = new TimeSpan(timer);
+        //    barTimer.Tick -= BarTimerTick;
+        //}
+        //private class EventHantHandler BarTimerTick(Action<string> WriteToLabel)
+        //{
+        //    WriteToLabel(DateTime.Now.ToLongTimeString());
 
-        }
+        //}
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             

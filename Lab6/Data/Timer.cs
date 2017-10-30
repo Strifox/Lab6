@@ -22,24 +22,24 @@ namespace Lab6.Data
     public class Time
     {
 
-        private static void BarTimerTick(object sender, EventArgs e, Action<string> WriteToLabel)
-        {
-          WriteToLabel(DateTime.Now.ToLongTimeString());
+        //private static void BarTimerTick(object sender, EventArgs e, Action<string> WriteToLabel)
+        //{
+        //  WriteToLabel(DateTime.Now.ToLongTimeString());
               
-        }
-        public static void InitializeTimer(int timer)
-        {
+        //}
+        //public static void InitializeTimer(int timer)
+        //{
            
-            DispatcherTimer barTimer = new DispatcherTimer();
-            barTimer.Interval = new TimeSpan(timer);
-            barTimer.Tick -= BarTimerTick;
+        //    DispatcherTimer barTimer = new DispatcherTimer();
+        //    barTimer.Interval = new TimeSpan(timer);
+        //    barTimer.Tick -= BarTimerTick;
             
-            if (barTimer != null)
-            {
-                MainWindow initiliazePub = new MainWindow();
-                initiliazePub.InitializeComponent();
-            }
+        //    if (barTimer != null)
+        //    {
+        //        MainWindow initiliazePub = new MainWindow();
+        //        initiliazePub.InitializeComponent();
+        //    }
 
-        }
+        //}
     }
 }

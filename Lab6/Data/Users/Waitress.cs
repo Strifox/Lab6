@@ -23,11 +23,11 @@ namespace Lab6.Data.Users
 {
     public class Waitress : Agents
     {
-        public BlockingCollection<string> behaviours = new BlockingCollection<string>()
-        {
-            $"Hittade {?} glas",
-            "Hämtar glas från bord",
-            $"Diskar glas och ställer i hyllan"
-        };
+        //public BlockingCollection<string> behaviours = new BlockingCollection<string>()
+        //{
+        //    $"Hittade {?} glas",
+        //    "Hämtar glas från bord",
+        //    $"Diskar glas och ställer i hyllan"
+        //};
     }
 }
