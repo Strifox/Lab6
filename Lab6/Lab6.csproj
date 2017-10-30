@@ -54,20 +54,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Bouncer.cs" />
-    <Compile Include="Guests.cs" />
-    <Compile Include="Patron.cs" />
-    <Compile Include="Waitress.cs" />
+    <Compile Include="Data\Users\Bouncer.cs" />
+    <Compile Include="Data\Users\Patron.cs" />
+    <Compile Include="Data\Users\Waitress.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Agents.cs" />
+    <Compile Include="Data\Users\Agents.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Bartender.cs" />
+    <Compile Include="Data\Users\Bartender.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -24,5 +24,10 @@ namespace Lab6
         {
             InitializeComponent();
         }
+
+        private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
     }
 }

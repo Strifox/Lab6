@@ -13,7 +13,7 @@
         </Grid.ColumnDefinitions>
         <ListBox x:Name="BartenderListBox" HorizontalAlignment="Left" Height="207" Margin="10,60,0,0" VerticalAlignment="Top" Width="170"/>
         <ListBox x:Name="WaiterListBox" HorizontalAlignment="Left" Height="207" Margin="198,60,0,0" VerticalAlignment="Top" Width="170"/>
-        <ListBox x:Name="GuestListBox" HorizontalAlignment="Left" Height="207" Margin="386,60,0,0" VerticalAlignment="Top" Width="170"/>
+        <ListBox x:Name="GuestListBox" HorizontalAlignment="Left" Height="207" Margin="386,60,0,0" VerticalAlignment="Top" Width="170" SelectionChanged="GuestListBox_SelectionChanged"/>
         <Label x:Name="BartenderLabel" Content="Bartender" HorizontalAlignment="Left" Margin="54,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="WaiterLabel" Content="Waiter/Waitress" HorizontalAlignment="Left" Margin="232,29,0,0" VerticalAlignment="Top" Width="104" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label x:Name="GuestLabel" Content="Guests" HorizontalAlignment="Left" Margin="432,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
