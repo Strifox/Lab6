@@ -23,6 +23,8 @@ namespace Lab6
     public abstract class Agents
     {
         public virtual BlockingCollection<string> Behaviours { get; set; }
+        public static CancellationTokenSource cts = new CancellationTokenSource();
+        public CancellationToken ct = cts.Token;
 
 
         public virtual string GetActions()

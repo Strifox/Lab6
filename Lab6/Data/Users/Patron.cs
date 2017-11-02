@@ -95,9 +95,27 @@ namespace Lab6
 //    return behaviours.Take();
 //}
 
-//public string Names()
-//{
-//    Random random = new Random();
-//    var name = namesList[random.Next(namesList.Count())];
-//    return name;
-//}
+        //public string Names()
+        //{
+        //    Random random = new Random();
+        //    var name = namesList[random.Next(namesList.Count())];
+        //    return name;
+        //}
+
+        public Patron()
+        {
+            Random random = new Random();
+            Name = namesList[random.Next(namesList.Count)];
+        }
+
+        public void Action(Action<string> logText)
+        {
+            numOfGuests += 1;
+            if (Time.Increment < 120)
+            {   
+                LogText = logText;
+                logText?.Invoke($"{Name} entered the bar");
+            }
+        }
+    }
+}

@@ -36,7 +36,6 @@ namespace Lab6
 
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)

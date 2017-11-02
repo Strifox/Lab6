@@ -21,8 +21,13 @@ namespace Lab6
 {
     public class Bouncer : Agents
     {
+        public Bouncer() : base()
+        {
+            //Callback(namesList[random.Next(namesList.Count)]);
+            //BounceGuests();
+        }
 
-        public Bouncer(Action<string> logText) : base()
+        public void Run(Action<string> logText)
         {
            
         }
@@ -36,8 +41,10 @@ namespace Lab6
                 Thread.Sleep(random.Next(3, 10) * 1000);
                 Task.Run(() =>
                 {
-                    Patron p = new Patron(logText);
+                    Patron p = new Patron();
+                    p.Action(logText);
                 });
+
             }
         }
     }
