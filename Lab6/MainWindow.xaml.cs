@@ -15,8 +15,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
 using System.Windows.Threading;
-using Lab6.Data;
-using Lab6.Data.Users;
 
 namespace Lab6
 {
@@ -25,60 +23,38 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int increment = 1;
+        private bool isOpen = false;
         public MainWindow()
         {
-           InitializeComponent();
+
+            InitializeComponent();
+            Time.BarTimerStart();
         }
 
-        //private static void BarTimer(int timer)
-        //{
-        //    DispatcherTimer barTimer = new DispatcherTimer();
-        //    barTimer.Interval = new TimeSpan(timer);
-        //    barTimer.Tick -= BarTimerTick;
-        //}
-        //private class EventHantHandler BarTimerTick(Action<string> WriteToLabel)
-        //{
-        //    WriteToLabel(DateTime.Now.ToLongTimeString());
-
-        //}
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            TimerLabel.Content = DateTime.Now.ToLongTimeString();
             Task.Run(() =>
             {
-                Random random = new Random();
-                Thread.Sleep(random.Next(3000, 10000));
-                Dispatcher?.Invoke(() =>
-                {                    
-                    Patron p = new Patron();
-                    GuestListBox.Items.Add(p.GetActions());
-                });
+                Bouncer b = new Bouncer(addList);
+             
             });
+        }
 
-            Task.Run(() =>
+        private void addList(string obj)
+        {
+            obj = $"{increment++} {obj}";
+            Dispatcher.Invoke(() =>
             {
-                Dispatcher.Invoke(() =>
-                {
-                    Bartender b = new Bartender();
-                    BartenderListBox.Items.Add(b.GetActions());
-                }); 
                 
+                GuestListBox.Items.Insert(0, obj);
             });
-
-            Task.Run(() =>
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    Waitress w = new Waitress();
-                    WaiterListBox.Items.Add(w.GetActions());
-                });
-
-            });
-
         }
     }
 }
+

@@ -16,21 +16,19 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
 using System.Windows.Threading;
-using Lab6.Data;
-using Lab6.Data.Users;
 
-namespace Lab6.Data.Users
+namespace Lab6
 {
     public class Patron : Agents
     {
+        public Action<string> LogText { get; set; }
+        // Fields
         // Class (static) Fields
         public static int numOfGuests = 0;
 
         // Propertys
         public string Name { get; set; }
-        public override BlockingCollection<string> Behaviours { get; set; }
-
-        // Lists / Collections
+        //BlockingCollection<string> behaviours { get; set; }
         private List<string> namesList = new List<string>()
         {
             "Andreas",
@@ -57,31 +55,42 @@ namespace Lab6.Data.Users
 
         // Methods
 
-        public override string GetActions()
+        //public string Behaviours()
+        //{
+        //    behaviours = new BlockingCollection<string>()
+        //    {
+        //        $"{Name} kommer in och går till baren",
+        //        $"{Name}Väntar på servering",
+        //        $"{Name} letar efter stol",
+        //        $"{Name} sitter och dricker öl",
+        //        $"{Name} har druckit upp och lämnar baren"
+        //    };
+        //    return behaviours.Take();
+        //}
+
+        //public string Names()
+        //{
+        //    Random random = new Random();
+        //    var name = namesList[random.Next(namesList.Count())];
+        //    return name;
+        //}
+
+        public Patron(Action<string> logText)
         {
-            Behaviours = new BlockingCollection<string>()
+            if (Time.Increment < 120)
             {
-                $"{Name} kommer in och går till baren",
-                $"{Name}Väntar på servering",
-                $"{Name} letar efter stol",
-                $"{Name} sitter och dricker öl",
-                $"{Name} har druckit upp och lämnar baren"
-            };
-            return Behaviours.Take();
-        }
+                Random random = new Random();
+                Name = namesList[random.Next(namesList.Count)];
+                LogText = logText;
 
-        public string GenerateRandomName()
-        {
-            Random random = new Random();
+                logText?.Invoke($"{Name} entered the bar");
+            }
+            else
+            {
+                LogText = logText;
+                logText?.Invoke("The Bouncer stopped working");
+            }
 
-            string name = namesList[random.Next(namesList.Count())];
-            return name;
-        }
-
-        public Patron() : base()
-        {
-            numOfGuests++;
-            Name = GenerateRandomName();
         }
     }
 }

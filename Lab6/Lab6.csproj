@@ -56,7 +56,7 @@
     </ApplicationDefinition>
     <Compile Include="Data\Users\Bouncer.cs" />
     <Compile Include="Data\Users\Patron.cs" />
-    <Compile Include="Data\Timer.cs" />
+    <Compile Include="Data\Time.cs" />
     <Compile Include="Data\Users\Waitress.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
