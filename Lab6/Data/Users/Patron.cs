@@ -58,63 +58,45 @@ namespace Lab6
             "Jennie"
         };
 
-        private void PatronEnter(Action<string> logText)
+        public void PatronEnters(Action<string> logText)
         {
             LogText = logText;
             Name = _namesList[_random.Next(_namesList.Count)];
             logText?.Invoke($"{Name} Enter the bar and walks up to bar");
+            Thread.Sleep(1);
         }
 
-        private void PatronDrink(Action<string> logText)
+        public void PatronBeer(Action<string> logText)
+        {
+            LogText = logText;
+            logText?.Invoke($"{Name} Standing in line and waiting for a beer");
+            Agents.BarQueue.Enqueue(this);
+        }
+
+        public void PatronChair(Action<string> logText)
+        {
+            LogText = logText;
+            Agents.BarQueue.TryDequeue(out)
+            logText?.Invoke($"{Name} waiting for an empty chair");
+        }
+
+        public void PatronDrinks(Action<string> logText)
         {
             LogText = logText;
             logText?.Invoke($"{Name} sits down and drinks his beer");
         }
 
-        public Patron(Action<string> logText)
+        public void PatronLeaves(Action<string> logText)
         {
-            if (Time.Increment < 12)
-                PatronEnter(logText);
-            else
-                PatronDrink(logText);
+            LogText = logText;
+            logText?.Invoke($"{Name} has finished drinking and is now leaving the bar");
         }
+
+        public Patron()
+        {
+        }
+
     }
 }
 
-//public string Behaviours()
-//{
-//    behaviours = new BlockingCollection<string>()
-//    {
-//        $"{Name} kommer in och går till baren",
-//        $"{Name}Väntar på servering",
-//        $"{Name} letar efter stol",
-//        $"{Name} sitter och dricker öl",
-//        $"{Name} har druckit upp och lämnar baren"
-//    };
-//    return behaviours.Take();
-//}
 
-        //public string Names()
-        //{
-        //    Random random = new Random();
-        //    var name = namesList[random.Next(namesList.Count())];
-        //    return name;
-        //}
-
-//        public Patron()
-//        {
-//            Random random = new Random();
-//            Name = namesList[random.Next(namesList.Count)];
-//        }
-
-//        public void Action(Action<string> logText)
-//        {
-//            numOfGuests += 1;
-//            if (Time.Increment < 120)
-//            {   
-//                LogText = logText;
-//                logText?.Invoke($"{Name} entered the bar");
-//            }
-//        }
-//    }
-//}

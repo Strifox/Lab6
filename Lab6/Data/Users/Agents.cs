@@ -22,6 +22,9 @@ namespace Lab6
 {
     public abstract class Agents
     {
+        public static ConcurrentQueue<Patron> BarQueue = new ConcurrentQueue<Patron>();
+        public static ConcurrentQueue<Items> ChairQueue = new ConcurrentQueue<Items>();
+        public static ConcurrentQueue<Items> GlassQueue = new ConcurrentQueue<Items>();
         public virtual BlockingCollection<string> Behaviours { get; set; }
         public static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct = cts.Token;
@@ -33,4 +36,5 @@ namespace Lab6
             return "A specific action!";
         }
     }
+
 }

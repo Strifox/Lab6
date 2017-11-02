@@ -24,10 +24,8 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
-        ConcurrentQueue<Patron> BeerQueue = new ConcurrentQueue<Patron>();
-        ConcurrentQueue<Patron> ChairQueue = new ConcurrentQueue<Patron>();
-        public CancellationTokenSource cts;
-        public CancellationToken ct;
+
+     
         private int increment = 1;
         public MainWindow()
         {
@@ -41,7 +39,7 @@ namespace Lab6
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
             Time.BarTimerStart();
-            Bouncer b = new Bouncer(AddList);
+            Bouncer b = new Bouncer();
             Task.Run(() =>
             {
                 b.Run(AddList);

@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Users\Bouncer.cs" />
+    <Compile Include="Data\Items.cs" />
     <Compile Include="Data\Users\Patron.cs" />
     <Compile Include="Data\Time.cs" />
     <Compile Include="Data\Users\Waitress.cs" />
