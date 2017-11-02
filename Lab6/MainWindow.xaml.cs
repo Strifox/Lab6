@@ -43,7 +43,6 @@ namespace Lab6
         //}
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
@@ -51,17 +50,35 @@ namespace Lab6
             TimerLabel.Content = DateTime.Now.ToLongTimeString();
             Task.Run(() =>
             {
+                Random random = new Random();
+                Thread.Sleep(random.Next(3000, 10000));
                 Dispatcher?.Invoke(() =>
+                {                    
+                    Patron p = new Patron();
+                    GuestListBox.Items.Add(p.GetActions());
+                });
+            });
+
+            Task.Run(() =>
+            {
+                Dispatcher.Invoke(() =>
                 {
-                    Random random = new Random();
-                    Thread.Sleep(random.Next(3000, 10000));
-                    var p = new Patron();
-                    GuestListBox.Items.Add(p.Behaviours());
+                    Bartender b = new Bartender();
+                    BartenderListBox.Items.Add(b.GetActions());
+                }); 
+                
+            });
+
+            Task.Run(() =>
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Waitress w = new Waitress();
+                    WaiterListBox.Items.Add(w.GetActions());
                 });
 
-
             });
-                
+
         }
     }
 }

@@ -23,9 +23,14 @@ namespace Lab6.Data.Users
 {
     public class Patron : Agents
     {
-        // Fields
+        // Class (static) Fields
+        public static int numOfGuests = 0;
+
+        // Propertys
         public string Name { get; set; }
-        BlockingCollection<string> behaviours { get; set; }
+        public override BlockingCollection<string> Behaviours { get; set; }
+
+        // Lists / Collections
         private List<string> namesList = new List<string>()
         {
             "Andreas",
@@ -50,10 +55,11 @@ namespace Lab6.Data.Users
             "Jennie"
         };
 
+        // Methods
 
-        public string Behaviours()
+        public override string GetActions()
         {
-            behaviours = new BlockingCollection<string>()
+            Behaviours = new BlockingCollection<string>()
             {
                 $"{Name} kommer in och går till baren",
                 $"{Name}Väntar på servering",
@@ -61,20 +67,21 @@ namespace Lab6.Data.Users
                 $"{Name} sitter och dricker öl",
                 $"{Name} har druckit upp och lämnar baren"
             };
-            return behaviours.Take();
+            return Behaviours.Take();
         }
 
-        public string Names()
+        public string GenerateRandomName()
         {
             Random random = new Random();
 
-            var name = namesList[random.Next(namesList.Count())];
+            string name = namesList[random.Next(namesList.Count())];
             return name;
         }
 
-        public Patron()
+        public Patron() : base()
         {
-            Name = Names();
+            numOfGuests++;
+            Name = GenerateRandomName();
         }
     }
 }

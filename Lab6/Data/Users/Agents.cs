@@ -23,6 +23,13 @@ namespace Lab6.Data.Users
 {
     public abstract class Agents
     {
-           
+        public virtual BlockingCollection<string> Behaviours { get; set; }
+
+
+        public virtual string GetActions()
+        {
+            Console.WriteLine("Override this in inherited classes!");
+            return "A specific action!";
+        }
     }
 }
