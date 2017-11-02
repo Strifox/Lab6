@@ -26,8 +26,7 @@ namespace Lab6
     {
         ConcurrentQueue<Patron> BeerQueue = new ConcurrentQueue<Patron>();
         ConcurrentQueue<Patron> ChairQueue = new ConcurrentQueue<Patron>();
-        public CancellationTokenSource cts;
-        public CancellationToken ct;
+     
         private int increment = 1;
         public MainWindow()
         {
