@@ -21,16 +21,15 @@ namespace Lab6
 {
     public class Patron : Agents
     {
-        public Action<string> LogText { get; set; }
         // Fields
+        private Random random = new Random();
         // Class (static) Fields
         private static int numOfGuests = 0;
 
         // Propertys
+        public Action<string> LogText { get; set; }
         public string Name { get; set; }
-        private Random random = new Random();
-
-        //BlockingCollection<string> behaviours { get; set; }
+        
         private List<string> namesList = new List<string>()
         {
             "Andreas",
@@ -63,7 +62,7 @@ namespace Lab6
 
         private void PatronWaits(Action<string> logText)
         {
-            Name
+            //Name
         }
 
         public Patron(Action<string> logText)
@@ -76,11 +75,9 @@ namespace Lab6
             {
               
             }
-
         }
     }
 }
-
         //public string Behaviours()
         //{
         //    behaviours = new BlockingCollection<string>()
