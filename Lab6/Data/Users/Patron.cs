@@ -78,8 +78,18 @@ namespace Lab6
             else
                 PatronDrink(logText);
         }
+        public void Action(Action<string> logText)
+        {
+            NumOfGuests += 1;
+            if (Time.Increment < 120)
+            {
+                LogText = logText;
+                logText?.Invoke($"{Name} entered the bar");
+            }
+        }
     }
 }
+
 
 
 //public string Behaviours()
@@ -108,14 +118,3 @@ namespace Lab6
 //            Name = namesList[random.Next(namesList.Count)];
 //        }
 
-//        public void Action(Action<string> logText)
-//        {
-//            numOfGuests += 1;
-//            if (Time.Increment < 120)
-//            {   
-//                LogText = logText;
-//                logText?.Invoke($"{Name} entered the bar");
-//            }
-//        }
-//    }
-//}

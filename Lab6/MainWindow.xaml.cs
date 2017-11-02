@@ -41,7 +41,7 @@ namespace Lab6
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
             Time.BarTimerStart();
-            Bouncer b = new Bouncer(AddList);
+            Bouncer b = new Bouncer();
             Task.Run(() =>
             {
                 b.Run(AddList);
