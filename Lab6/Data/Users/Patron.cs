@@ -81,7 +81,6 @@ namespace Lab6
     }
 }
 
-
 //public string Behaviours()
 //{
 //    behaviours = new BlockingCollection<string>()
