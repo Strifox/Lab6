@@ -23,16 +23,18 @@ namespace Lab6
     {
         //Delegates
         private Action<string> LogText { get; set; }
+
         // Fields
         // Class (static) Fields
-        public static int numOfGuests = 0;
+        public static int NumOfGuests = 0;
 
         // Propertys
         public string Name { get; set; }
-        private Random random = new Random();
+
+        private readonly Random _random = new Random();
 
         //BlockingCollection<string> behaviours { get; set; }
-        private List<string> namesList = new List<string>()
+        private readonly List<string> _namesList = new List<string>()
         {
             "Andreas",
             "Erik",
@@ -56,27 +58,46 @@ namespace Lab6
             "Jennie"
         };
 
+        private void PatronEnter(Action<string> logText)
+        {
+            LogText = logText;
+            Name = _namesList[_random.Next(_namesList.Count)];
+            logText?.Invoke($"{Name} Enter the bar and walks up to bar");
+        }
 
+        private void PatronDrink(Action<string> logText)
+        {
+            LogText = logText;
+            logText?.Invoke($"{Name} sits down and drinks his beer");
+        }
+
+        public Patron(Action<string> logText)
+        {
+            if (Time.Increment < 12)
+                PatronEnter(logText);
+            else
+                PatronDrink(logText);
         }
     }
 }
 
-        //public string Behaviours()
-        //{
-        //    behaviours = new BlockingCollection<string>()
-        //    {
-        //        $"{Name} kommer in och går till baren",
-        //        $"{Name}Väntar på servering",
-        //        $"{Name} letar efter stol",
-        //        $"{Name} sitter och dricker öl",
-        //        $"{Name} har druckit upp och lämnar baren"
-        //    };
-        //    return behaviours.Take();
-        //}
 
-        //public string Names()
-        //{
-        //    Random random = new Random();
-        //    var name = namesList[random.Next(namesList.Count())];
-        //    return name;
-        //}
+//public string Behaviours()
+//{
+//    behaviours = new BlockingCollection<string>()
+//    {
+//        $"{Name} kommer in och går till baren",
+//        $"{Name}Väntar på servering",
+//        $"{Name} letar efter stol",
+//        $"{Name} sitter och dricker öl",
+//        $"{Name} har druckit upp och lämnar baren"
+//    };
+//    return behaviours.Take();
+//}
+
+//public string Names()
+//{
+//    Random random = new Random();
+//    var name = namesList[random.Next(namesList.Count())];
+//    return name;
+//}

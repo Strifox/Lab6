@@ -24,7 +24,13 @@ namespace Lab6
 
         public Bouncer(Action<string> logText) : base()
         {
-            while (true)
+           
+        }
+
+        public void Run(Action<string> logText)
+        {
+            ct
+            while (!isCancellationRequested)
             {
                 Random random = new Random();
                 Thread.Sleep(random.Next(3, 10) * 1000);
@@ -33,8 +39,7 @@ namespace Lab6
                     Patron p = new Patron(logText);
                 });
             }
-            //Callback(namesList[random.Next(namesList.Count)]);
-            //BounceGuests();
         }
     }
+
 }

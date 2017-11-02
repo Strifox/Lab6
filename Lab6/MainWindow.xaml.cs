@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,12 +24,14 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
+        ConcurrentQueue<Patron> BeerQueue = new ConcurrentQueue<Patron>();
+        ConcurrentQueue<Patron> ChairQueue = new ConcurrentQueue<Patron>();
+        public CancellationTokenSource cts;
+        public CancellationToken ct;
         private int increment = 1;
         public MainWindow()
         {
-
             InitializeComponent();
-            Time.BarTimerStart();
         }
 
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -38,18 +41,20 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
+            Time.BarTimerStart();
+            Bouncer b = new Bouncer(AddList);
             Task.Run(() =>
             {
-                Bouncer b = new Bouncer(addList);
+                b.Run(AddList);
             });
         }
 
-        private void addList(string obj)
+        private void AddList(string obj)
         {
             obj = $"{increment++} {obj}";
             Dispatcher.Invoke(() =>
             {
-                
+
                 GuestListBox.Items.Insert(0, obj);
             });
         }
