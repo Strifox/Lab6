@@ -21,9 +21,10 @@ namespace Lab6
 {
     public class Patron : Agents
     {
+        public Action<string> LogText { get; set; }
         // Fields
         public string Name { get; set; }
-        BlockingCollection<string> behaviours { get; set; }
+        //BlockingCollection<string> behaviours { get; set; }
         private List<string> namesList = new List<string>()
         {
             "Andreas",
@@ -49,30 +50,42 @@ namespace Lab6
         };
 
 
-        public string Behaviours()
+        //public string Behaviours()
+        //{
+        //    behaviours = new BlockingCollection<string>()
+        //    {
+        //        $"{Name} kommer in och går till baren",
+        //        $"{Name}Väntar på servering",
+        //        $"{Name} letar efter stol",
+        //        $"{Name} sitter och dricker öl",
+        //        $"{Name} har druckit upp och lämnar baren"
+        //    };
+        //    return behaviours.Take();
+        //}
+
+        //public string Names()
+        //{
+        //    Random random = new Random();
+        //    var name = namesList[random.Next(namesList.Count())];
+        //    return name;
+        //}
+
+        public Patron(Action<string> logText)
         {
-            behaviours = new BlockingCollection<string>()
+            if (Time.Increment < 120)
             {
-                $"{Name} kommer in och går till baren",
-                $"{Name}Väntar på servering",
-                $"{Name} letar efter stol",
-                $"{Name} sitter och dricker öl",
-                $"{Name} har druckit upp och lämnar baren"
-            };
-            return behaviours.Take();
-        }
+                Random random = new Random();
+                Name = namesList[random.Next(namesList.Count)];
+                LogText = logText;
 
-        public string Names()
-        {
-            Random random = new Random();
+                logText?.Invoke($"{Name} entered the bar");
+            }
+            else
+            {
+                LogText = logText;
+                logText?.Invoke("The Bouncer stopped working");
+            }
 
-            var name = namesList[random.Next(namesList.Count())];
-            return name;
-        }
-
-        public Patron()
-        {
-            Name = Names();
         }
     }
 }

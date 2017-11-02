@@ -23,12 +23,13 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private int increment = 1;
+        private bool isOpen = false;
         public MainWindow()
         {
 
             InitializeComponent();
-            Time.BarTimer();
+            Time.BarTimerStart();
         }
 
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,26 +37,24 @@ namespace Lab6
 
         }
 
-
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            if (BtnOpenCloseBar.Content.ToString() == "Open")
-            {
-
-            }
             Task.Run(() =>
             {
-                Dispatcher?.Invoke(() =>
-                {
-                    Random random = new Random();
-                    Thread.Sleep(random.Next(3000, 10000));
-                    var p = new Patron();
-                    GuestListBox.Items.Add(p.Behaviours());
-                });
-
+                Bouncer b = new Bouncer(addList);
+             
             });
+        }
 
-
+        private void addList(string obj)
+        {
+            obj = $"{increment++} {obj}";
+            Dispatcher.Invoke(() =>
+            {
+                
+                GuestListBox.Items.Insert(0, obj);
+            });
         }
     }
 }
+

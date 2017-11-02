@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Threading;
-using Timer = System.Timers.Timer;
 
 namespace Lab6
 {
@@ -9,8 +8,10 @@ namespace Lab6
     {
         static MainWindow Form = Application.Current.MainWindow as MainWindow;
         private static int increment;
-        public static void BarTimer()
+        public static int Increment { get { return increment; } set { increment = value; } }
+        public static void BarTimerStart()
         {
+
             DispatcherTimer barTimer = new DispatcherTimer()
             {
                 Interval = TimeSpan.FromSeconds(1)
