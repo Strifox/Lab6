@@ -58,32 +58,44 @@ namespace Lab6
             "Jennie"
         };
 
-        private void PatronEnter(Action<string> logText)
+        public void PatronEnters(Action<string> logText)
         {
             LogText = logText;
             Name = _namesList[_random.Next(_namesList.Count)];
             logText?.Invoke($"{Name} Enter the bar and walks up to bar");
+            Thread.Sleep(1);
         }
 
-        private void PatronDrink(Action<string> logText)
+        public void PatronBeer(Action<string> logText)
+        {
+            LogText = logText;
+            logText?.Invoke($"{Name} Standing in line and waiting for a beer");
+            Agents.BarQueue.Enqueue(this);
+        }
+
+        public void PatronChair(Action<string> logText)
+        {
+            LogText = logText;
+            Agents.BarQueue.TryDequeue(out)
+            logText?.Invoke($"{Name} waiting for an empty chair");
+        }
+
+        public void PatronDrinks(Action<string> logText)
         {
             LogText = logText;
             logText?.Invoke($"{Name} sits down and drinks his beer");
         }
 
+        public void PatronLeaves(Action<string> logText)
+        {
+            LogText = logText;
+            logText?.Invoke($"{Name} has finished drinking and is now leaving the bar");
+        }
+
         public Patron()
         {
-            
         }
-        public void Action(Action<string> logText)
-        {
-            NumOfGuests += 1;
-            if (Time.Increment < 120)
-            {
-                LogText = logText;
-                logText?.Invoke($"{Name} entered the bar");
-            }
-        }
+
     }
 }
 

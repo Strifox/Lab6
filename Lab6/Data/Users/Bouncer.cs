@@ -37,7 +37,7 @@ namespace Lab6
                 Task.Run(() =>
                 {
                     Patron p = new Patron();
-                    p.Action(logText);
+                    p.PatronEnters(logText);
                 });
 
             }

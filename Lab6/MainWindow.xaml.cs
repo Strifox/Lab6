@@ -24,8 +24,7 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
-        ConcurrentQueue<Patron> BeerQueue = new ConcurrentQueue<Patron>();
-        ConcurrentQueue<Patron> ChairQueue = new ConcurrentQueue<Patron>();
+
      
         private int increment = 1;
         public MainWindow()
