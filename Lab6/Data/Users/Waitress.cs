@@ -21,11 +21,23 @@ namespace Lab6
 {
     public class Waitress : Agents
     {
-        //public BlockingCollection<string> behaviours = new BlockingCollection<string>()
-        //{
-        //    $"Hittade {?} glas",
-        //    "Hämtar glas från bord",
-        //    $"Diskar glas och ställer i hyllan"
-        //};
+        public override BlockingCollection<string> Behaviours { get; set;}
+
+        public override string GetActions()
+        {
+            Behaviours = new BlockingCollection<string>()
+            {
+                $"Väntar..",
+                $"Plockar glas från bord",
+                $"Hittade ? glas",
+                $"Ställer tillbaka glasen i hyllan"
+            };
+            return Behaviours.Take();
+        }
+
+        public Waitress() : base()
+        {
+            GetActions();
+        }
     }
 }

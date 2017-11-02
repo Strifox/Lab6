@@ -21,11 +21,22 @@ namespace Lab6
 {
     public class Bartender : Agents
     {
-        //public BlockingCollection<string> behaviours = new BlockingCollection<string>()
-        //{
-        //    "väntar i baren",
-        //    "Plockar glas från hyllan",
-        //    $"Häller upp öl till {?}"
-        //};
+        public override BlockingCollection<string> Behaviours { get; set; }
+
+        public override string GetActions()
+        {
+            Behaviours = new BlockingCollection<string>()
+            {
+                "väntar i baren",
+                "Plockar glas från hyllan",
+                $"Häller upp öl till ?"
+            };
+            return Behaviours.Take();   
+        }
+
+        public Bartender() : base()
+        {
+            GetActions();
+        }
     }
 }

@@ -24,6 +24,10 @@ namespace Lab6
         //Delegates
         private Action<string> LogText { get; set; }
         // Fields
+        // Class (static) Fields
+        public static int numOfGuests = 0;
+
+        // Propertys
         public string Name { get; set; }
         private Random random = new Random();
 
