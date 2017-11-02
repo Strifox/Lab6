@@ -62,21 +62,22 @@ namespace Lab6
         {
             LogText = logText;
             Name = _namesList[_random.Next(_namesList.Count)];
-            logText?.Invoke($"{Name} Enter the bar and walks up to bar");
+            logText?.Invoke($"{Name} enters the bar and walks up to the barqueue");
             Thread.Sleep(1);
+            Agents.BarQueue.TryAdd(this);
         }
 
         public void PatronBeer(Action<string> logText)
         {
+            Agents.BarQueue.Take();
             LogText = logText;
-            logText?.Invoke($"{Name} Standing in line and waiting for a beer");
-            Agents.BarQueue.Enqueue(this);
+            logText?.Invoke($"{Name} takes his beer from bartender");
+            //Items.ChairQueue.TryAdd(new Chair());
         }
 
         public void PatronChair(Action<string> logText)
         {
             LogText = logText;
-            Agents.BarQueue.TryDequeue(out)
             logText?.Invoke($"{Name} waiting for an empty chair");
         }
 
