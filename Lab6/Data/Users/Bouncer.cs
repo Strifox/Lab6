@@ -21,20 +21,25 @@ namespace Lab6
 {
     public class Bouncer : Agents
     {
-
-        public Bouncer(Action<string> logText) : base()
+        public Bouncer() : base()
         {
-            while (true)
+            //Callback(namesList[random.Next(namesList.Count)]);
+            //BounceGuests();
+        }
+
+        public void Run(Action<string> logText)
+        {
+            while (!ct.IsCancellationRequested) // 
             {
                 Random random = new Random();
                 Thread.Sleep(random.Next(3, 10) * 1000);
                 Task.Run(() =>
                 {
-                    Patron p = new Patron(logText);
+                    Patron p = new Patron();
+                    p.Action(logText);
                 });
+
             }
-            //Callback(namesList[random.Next(namesList.Count)]);
-            //BounceGuests();
         }
     }
 }

@@ -34,24 +34,22 @@ namespace Lab6
 
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
+            Bouncer b = new Bouncer();
             Task.Run(() =>
             {
-                Bouncer b = new Bouncer(addList);
-             
+                b.Run(AddList);
             });
         }
 
-        private void addList(string obj)
+        private void AddList(string obj)
         {
             obj = $"{increment++} {obj}";
             Dispatcher.Invoke(() =>
             {
-                
                 GuestListBox.Items.Insert(0, obj);
             });
         }

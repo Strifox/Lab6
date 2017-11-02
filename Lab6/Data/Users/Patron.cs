@@ -24,7 +24,7 @@ namespace Lab6
         public Action<string> LogText { get; set; }
         // Fields
         // Class (static) Fields
-        public static int numOfGuests = 0;
+        private static int numOfGuests = 0;
 
         // Propertys
         public string Name { get; set; }
@@ -75,22 +75,20 @@ namespace Lab6
         //    return name;
         //}
 
-        public Patron(Action<string> logText)
+        public Patron()
         {
-            if (Time.Increment < 120)
-            {
-                Random random = new Random();
-                Name = namesList[random.Next(namesList.Count)];
-                LogText = logText;
+            Random random = new Random();
+            Name = namesList[random.Next(namesList.Count)];
+        }
 
+        public void Action(Action<string> logText)
+        {
+            numOfGuests += 1;
+            if (Time.Increment < 120)
+            {   
+                LogText = logText;
                 logText?.Invoke($"{Name} entered the bar");
             }
-            else
-            {
-                LogText = logText;
-                logText?.Invoke("The Bouncer stopped working");
-            }
-
         }
     }
 }
