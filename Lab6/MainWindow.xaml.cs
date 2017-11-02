@@ -24,7 +24,6 @@ namespace Lab6
     public partial class MainWindow : Window
     {
         private int increment = 1;
-        private bool isOpen = false;
         public MainWindow()
         {
 
@@ -42,7 +41,6 @@ namespace Lab6
             Task.Run(() =>
             {
                 Bouncer b = new Bouncer(addList);
-             
             });
         }
 

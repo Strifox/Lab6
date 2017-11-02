@@ -21,9 +21,12 @@ namespace Lab6
 {
     public class Patron : Agents
     {
-        public Action<string> LogText { get; set; }
+        //Delegates
+        private Action<string> LogText { get; set; }
         // Fields
         public string Name { get; set; }
+        private Random random = new Random();
+
         //BlockingCollection<string> behaviours { get; set; }
         private List<string> namesList = new List<string>()
         {
@@ -49,6 +52,31 @@ namespace Lab6
             "Jennie"
         };
 
+        private void PatronEnters(Action<string> logText)
+        {
+            Name = namesList[random.Next(namesList.Count)];
+            logText?.Invoke($"{Name} entered the bar");
+        }
+
+        private void PatronWaits(Action<string> logText)
+        {
+            Name
+        }
+
+        public Patron(Action<string> logText)
+        {
+            if (Time.Increment < 120)
+            {
+                PatronEnters(logText);
+            }
+            else
+            {
+              
+            }
+
+        }
+    }
+}
 
         //public string Behaviours()
         //{
@@ -69,23 +97,3 @@ namespace Lab6
         //    var name = namesList[random.Next(namesList.Count())];
         //    return name;
         //}
-
-        public Patron(Action<string> logText)
-        {
-            if (Time.Increment < 120)
-            {
-                Random random = new Random();
-                Name = namesList[random.Next(namesList.Count)];
-                LogText = logText;
-
-                logText?.Invoke($"{Name} entered the bar");
-            }
-            else
-            {
-                LogText = logText;
-                logText?.Invoke("The Bouncer stopped working");
-            }
-
-        }
-    }
-}
