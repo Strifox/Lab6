@@ -21,16 +21,20 @@ namespace Lab6
 {
     public class Patron : Agents
     {
+        //Delegates
+        private Action<string> LogText { get; set; }
+
         // Fields
-        private Random random = new Random();
         // Class (static) Fields
-        private static int numOfGuests = 0;
+        public static int NumOfGuests = 0;
 
         // Propertys
-        public Action<string> LogText { get; set; }
         public string Name { get; set; }
-        
-        private List<string> namesList = new List<string>()
+
+        private readonly Random _random = new Random();
+
+        //BlockingCollection<string> behaviours { get; set; }
+        private readonly List<string> _namesList = new List<string>()
         {
             "Andreas",
             "Erik",
@@ -54,42 +58,42 @@ namespace Lab6
             "Jennie"
         };
 
-        private void PatronEnters(Action<string> logText)
+        private void PatronEnter(Action<string> logText)
         {
-            Name = namesList[random.Next(namesList.Count)];
-            logText?.Invoke($"{Name} entered the bar");
+            LogText = logText;
+            Name = _namesList[_random.Next(_namesList.Count)];
+            logText?.Invoke($"{Name} Enter the bar and walks up to bar");
         }
 
-        private void PatronWaits(Action<string> logText)
+        private void PatronDrink(Action<string> logText)
         {
-            //Name
+            LogText = logText;
+            logText?.Invoke($"{Name} sits down and drinks his beer");
         }
 
         public Patron(Action<string> logText)
         {
-            if (Time.Increment < 120)
-            {
-                PatronEnters(logText);
-            }
+            if (Time.Increment < 12)
+                PatronEnter(logText);
             else
-            {
-              
-            }
+                PatronDrink(logText);
         }
     }
 }
-        //public string Behaviours()
-        //{
-        //    behaviours = new BlockingCollection<string>()
-        //    {
-        //        $"{Name} kommer in och går till baren",
-        //        $"{Name}Väntar på servering",
-        //        $"{Name} letar efter stol",
-        //        $"{Name} sitter och dricker öl",
-        //        $"{Name} har druckit upp och lämnar baren"
-        //    };
-        //    return behaviours.Take();
-        //}
+
+
+//public string Behaviours()
+//{
+//    behaviours = new BlockingCollection<string>()
+//    {
+//        $"{Name} kommer in och går till baren",
+//        $"{Name}Väntar på servering",
+//        $"{Name} letar efter stol",
+//        $"{Name} sitter och dricker öl",
+//        $"{Name} har druckit upp och lämnar baren"
+//    };
+//    return behaviours.Take();
+//}
 
         //public string Names()
         //{
@@ -98,20 +102,20 @@ namespace Lab6
         //    return name;
         //}
 
-        public Patron()
-        {
-            Random random = new Random();
-            Name = namesList[random.Next(namesList.Count)];
-        }
+//        public Patron()
+//        {
+//            Random random = new Random();
+//            Name = namesList[random.Next(namesList.Count)];
+//        }
 
-        public void Action(Action<string> logText)
-        {
-            numOfGuests += 1;
-            if (Time.Increment < 120)
-            {   
-                LogText = logText;
-                logText?.Invoke($"{Name} entered the bar");
-            }
-        }
-    }
-}
+//        public void Action(Action<string> logText)
+//        {
+//            numOfGuests += 1;
+//            if (Time.Increment < 120)
+//            {   
+//                LogText = logText;
+//                logText?.Invoke($"{Name} entered the bar");
+//            }
+//        }
+//    }
+//}
