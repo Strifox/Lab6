@@ -71,12 +71,9 @@ namespace Lab6
             logText?.Invoke($"{Name} sits down and drinks his beer");
         }
 
-        public Patron(Action<string> logText)
+        public Patron()
         {
-            if (Time.Increment < 12)
-                PatronEnter(logText);
-            else
-                PatronDrink(logText);
+            
         }
         public void Action(Action<string> logText)
         {
@@ -90,31 +87,4 @@ namespace Lab6
     }
 }
 
-
-
-//public string Behaviours()
-//{
-//    behaviours = new BlockingCollection<string>()
-//    {
-//        $"{Name} kommer in och går till baren",
-//        $"{Name}Väntar på servering",
-//        $"{Name} letar efter stol",
-//        $"{Name} sitter och dricker öl",
-//        $"{Name} har druckit upp och lämnar baren"
-//    };
-//    return behaviours.Take();
-//}
-
-        //public string Names()
-        //{
-        //    Random random = new Random();
-        //    var name = namesList[random.Next(namesList.Count())];
-        //    return name;
-        //}
-
-//        public Patron()
-//        {
-//            Random random = new Random();
-//            Name = namesList[random.Next(namesList.Count)];
-//        }
 
