@@ -28,6 +28,8 @@ namespace Lab6
 
         // Propertys
         public string Name { get; set; }
+        private Random random = new Random();
+
         //BlockingCollection<string> behaviours { get; set; }
         private List<string> namesList = new List<string>()
         {
@@ -53,7 +55,31 @@ namespace Lab6
             "Jennie"
         };
 
-        // Methods
+        private void PatronEnters(Action<string> logText)
+        {
+            Name = namesList[random.Next(namesList.Count)];
+            logText?.Invoke($"{Name} entered the bar");
+        }
+
+        private void PatronWaits(Action<string> logText)
+        {
+            Name
+        }
+
+        public Patron(Action<string> logText)
+        {
+            if (Time.Increment < 120)
+            {
+                PatronEnters(logText);
+            }
+            else
+            {
+              
+            }
+
+        }
+    }
+}
 
         //public string Behaviours()
         //{
