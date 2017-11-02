@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 
+
 namespace Lab6
 {
     public static class Time

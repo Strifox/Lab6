@@ -29,19 +29,14 @@ namespace Lab6
 
         public void Run(Action<string> logText)
         {
-           
-        }
-
-        public void Run(Action<string> logText)
-        {
-            ct
-            while (!isCancellationRequested)
+         
+            while (!ct.IsCancellationRequested)
             {
                 Random random = new Random();
                 Thread.Sleep(random.Next(3, 10) * 1000);
                 Task.Run(() =>
                 {
-                    Patron p = new Patron();
+                    Patron p = new Patron(logText);
                     p.Action(logText);
                 });
 

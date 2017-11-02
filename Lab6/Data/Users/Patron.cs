@@ -102,20 +102,20 @@ namespace Lab6
         //    return name;
         //}
 
-        public Patron()
-        {
-            Random random = new Random();
-            Name = namesList[random.Next(namesList.Count)];
-        }
+//        public Patron()
+//        {
+//            Random random = new Random();
+//            Name = namesList[random.Next(namesList.Count)];
+//        }
 
-        public void Action(Action<string> logText)
-        {
-            numOfGuests += 1;
-            if (Time.Increment < 120)
-            {   
-                LogText = logText;
-                logText?.Invoke($"{Name} entered the bar");
-            }
-        }
-    }
-}
+//        public void Action(Action<string> logText)
+//        {
+//            numOfGuests += 1;
+//            if (Time.Increment < 120)
+//            {   
+//                LogText = logText;
+//                logText?.Invoke($"{Name} entered the bar");
+//            }
+//        }
+//    }
+//}
