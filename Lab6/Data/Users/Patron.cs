@@ -56,27 +56,6 @@ namespace Lab6
             "Jennie"
         };
 
-        private void PatronEnters(Action<string> logText)
-        {
-            Name = namesList[random.Next(namesList.Count)];
-            logText?.Invoke($"{Name} entered the bar");
-        }
-
-        private void PatronWaits(Action<string> logText)
-        {
-            Name
-        }
-
-        public Patron(Action<string> logText)
-        {
-            if (Time.Increment < 120)
-            {
-                PatronEnters(logText);
-            }
-            else
-            {
-              
-            }
 
         }
     }
