@@ -30,6 +30,7 @@ namespace Lab6
         public MainWindow()
         {
             InitializeComponent();
+            Items.CreateItems();
         }
 
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

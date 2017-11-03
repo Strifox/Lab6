@@ -21,17 +21,6 @@ namespace Lab6
 {
     public class Bartender : Agents
     {
-        public override string GetActions()
-        {
-            Behaviours = new BlockingCollection<string>()
-            {
-                "väntar i baren",
-                "Plockar glas från hyllan",
-                $"Häller upp öl till ?"
-            };
-            return Behaviours.Take();   
-            
-        }
 
         public Bartender() : base()
         {
