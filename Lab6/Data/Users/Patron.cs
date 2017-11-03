@@ -69,7 +69,7 @@ namespace Lab6
             "Jennie"
         };
 
-        public void RunPatron()
+        public void RunPatron(Action<string> logText)
         {
             Behaviour = () =>
             {
@@ -137,9 +137,10 @@ namespace Lab6
 
         }
 
-        public Patron()
+        public Patron(Action<string> logText)
         {
-            RunPatron();
+            LogText = logText;
+            RunPatron(logText);
         }
 
     }

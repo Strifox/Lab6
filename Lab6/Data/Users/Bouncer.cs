@@ -36,7 +36,7 @@ namespace Lab6
                 Thread.Sleep(random.Next(3, 10) * 1000);
                 Task.Run(() =>
                 {
-                    Patron p = new Patron();
+                    Patron p = new Patron(logText);
                 });
 
             }
