@@ -21,17 +21,28 @@ namespace Lab6
 {
     public class Patron : Agents
     {
-        //Delegates
-        private Action<string> LogText { get; set; }
-
         // Fields
-        // Class (static) Fields
         public static int NumOfGuests = 0;
-
-        // Propertys
-        public string Name { get; set; }
-
         private readonly Random _random = new Random();
+
+        // Properties
+        public string Name { get; set; }
+        private Action<string> LogText { get; set; }
+        private bool GotDrink = false;
+        private bool IsSitting = false;
+        private bool IsDrinking = false;
+
+        // Inherited abstract properties
+        public override Action Behaviour { get; set; }
+        public override Bar BarStatus { get; set; }
+        public override bool IsActive { get; set; }
+        public override void Deactive()
+        {
+            GotDrink = false;
+            IsSitting = false;
+            IsDrinking = false;
+            base.Deactive();
+        }
 
         //BlockingCollection<string> behaviours { get; set; }
         private readonly List<string> _namesList = new List<string>()
@@ -58,43 +69,77 @@ namespace Lab6
             "Jennie"
         };
 
+        public void RunPatron()
+        {
+            Behaviour = () =>
+            {
+                if (GotDrink && !BarStatus.IsGuestInQueue(this))
+                {
+                    BarStatus.AddGuestToQueue(this);
+                    PatronEnters(LogText);
+                }
+                while (!GotDrink)
+                {
+                    Thread.Sleep(200);
+                }
+                if (GotDrink && !IsSitting)
+                {
+                    PatronTakesBeerAndWaitForChair(LogText);
+                    while (!BarStatus.CanTakeChair)
+                    {
+                        Thread.Sleep(200);
+                    }
+                    PatronChair(LogText);
+                    BarStatus.TakeChair();
+                    IsSitting = true;
+                }
+                if (GotDrink && IsSitting)
+                {
+                    PatronDrinks(LogText);
+                    PatronLeaves(LogText);
+                    BarStatus.ReturnChair();
+                    Deactive();
+                }
+            };
+        }
         public void PatronEnters(Action<string> logText)
         {
             LogText = logText;
             Name = _namesList[_random.Next(_namesList.Count)];
-            logText?.Invoke($"{Name} enters the bar and walks up to the barqueue");
-            Thread.Sleep(1);
-            Agents.BarQueue.TryAdd(this);
+            logText?.Invoke($"{Name} enters the bar and walks up to the barqueue\nThere are {BarStatus.guestsInBarQueue} people in queue");
+            Thread.Sleep(1000);
         }
 
-        public void PatronBeer(Action<string> logText)
+        public void PatronTakesBeerAndWaitForChair(Action<string> logText)
         {
-            Agents.BarQueue.Take();
             LogText = logText;
-            logText?.Invoke($"{Name} takes his beer from bartender");
-            //Items.ChairQueue.TryAdd(new Chair());
+            logText?.Invoke($"{Name} takes the beer from bartender and waits for an empty chair");
         }
 
         public void PatronChair(Action<string> logText)
         {
             LogText = logText;
-            logText?.Invoke($"{Name} waiting for an empty chair");
+            logText?.Invoke($"{Name} sits down on a chair");
+            Thread.Sleep(4000);
         }
 
         public void PatronDrinks(Action<string> logText)
         {
             LogText = logText;
-            logText?.Invoke($"{Name} sits down and drinks his beer");
+            logText?.Invoke($"{Name}drinks his beer");
+            Thread.Sleep(_random.Next(10000, 20000));
         }
 
         public void PatronLeaves(Action<string> logText)
         {
             LogText = logText;
             logText?.Invoke($"{Name} has finished drinking and is now leaving the bar");
+
         }
 
         public Patron()
         {
+            RunPatron();
         }
 
     }

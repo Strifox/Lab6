@@ -37,11 +37,14 @@ namespace Lab6
                 Task.Run(() =>
                 {
                     Patron p = new Patron();
-                    p.PatronEnters(logText);
                 });
 
             }
         }
+
+        public override Bar BarStatus { get; set; }
+        public override bool IsActive { get; set; }
+        public override Action Behaviour { get; set; }
     }
 
 }

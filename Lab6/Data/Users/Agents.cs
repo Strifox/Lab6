@@ -22,9 +22,14 @@ namespace Lab6
     public abstract class Agents
     {
         public static BlockingCollection<Patron> BarQueue = new BlockingCollection<Patron>();
-
         public static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct = cts.Token;
+        public abstract Bar BarStatus { get; set; }
+        public abstract bool IsActive { get; set; }
+        public abstract Action Behaviour { get; set; }
+        public virtual void SetActive() { IsActive = true;}
+        public virtual void Deactive() { IsActive = false; }
+
 
 
         public virtual string GetActions()
