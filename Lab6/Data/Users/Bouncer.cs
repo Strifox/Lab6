@@ -21,27 +21,23 @@ namespace Lab6
 {
     public class Bouncer : Agents
     {
+        private Random random = new Random();
         public Bouncer() : base()
         {
             //Callback(namesList[random.Next(namesList.Count)]);
             //BounceGuests();
         }
 
-        public void Run(Action<string> logText)
+        public void Run(Action<string> logText, Action numOfGuests)
         {
-         
-            while (!ct.IsCancellationRequested)
+            Thread.Sleep(random.Next(3, 10) * 1000);
+            Task.Run(() =>
             {
-                Random random = new Random();
-                Thread.Sleep(random.Next(3, 10) * 1000);
-                Task.Run(() =>
-                {
-                    Patron p = new Patron();
-                    p.PatronEnters(logText);
-                });
+                Patron p = new Patron();
+                numOfGuests();
+                p.PatronEnters(logText);
+            });
 
-            }
         }
     }
-
 }

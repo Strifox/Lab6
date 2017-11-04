@@ -24,10 +24,6 @@ namespace Lab6
     {
         public static BlockingCollection<Patron> BarQueue = new BlockingCollection<Patron>();
 
-        public static CancellationTokenSource cts = new CancellationTokenSource();
-        public CancellationToken ct = cts.Token;
-
-
         public virtual string GetActions()
         {
             Console.WriteLine("Override this in inherited classes!");

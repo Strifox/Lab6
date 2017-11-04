@@ -25,15 +25,15 @@ namespace Lab6
         private Action<string> LogText { get; set; }
 
         // Fields
+        private readonly Random _random = new Random();
+
         // Class (static) Fields
-        public static int NumOfGuests = 0;
+        public static int numOfGuests = 0;
 
         // Propertys
         public string Name { get; set; }
 
-        private readonly Random _random = new Random();
 
-        //BlockingCollection<string> behaviours { get; set; }
         private readonly List<string> _namesList = new List<string>()
         {
             "Andreas",
@@ -61,7 +61,6 @@ namespace Lab6
         public void PatronEnters(Action<string> logText)
         {
             LogText = logText;
-            Name = _namesList[_random.Next(_namesList.Count)];
             logText?.Invoke($"{Name} enters the bar and walks up to the barqueue");
             Thread.Sleep(1);
             Agents.BarQueue.TryAdd(this);
@@ -70,7 +69,6 @@ namespace Lab6
         public void PatronBeer(Action<string> logText)
         {
             Agents.BarQueue.Take();
-            LogText = logText;
             logText?.Invoke($"{Name} takes his beer from bartender");
             //Items.ChairQueue.TryAdd(new Chair());
         }
@@ -95,6 +93,8 @@ namespace Lab6
 
         public Patron()
         {
+            Name = _namesList[_random.Next(_namesList.Count)];
+            numOfGuests += 1;
         }
 
     }
