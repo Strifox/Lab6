@@ -57,9 +57,5 @@ namespace Lab6
             ////    result.Name;
             ////}
         }
-
-        public override Bar BarStatus { get; set; }
-        public override bool IsActive { get; set; }
-        public override Action Behaviour { get; set; }
     }
 }
