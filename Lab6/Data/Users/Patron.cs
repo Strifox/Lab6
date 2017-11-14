@@ -32,8 +32,12 @@ namespace Lab6
         // Class (static) Fields
         public static int numOfGuests = 0;
 
-        // Propertys
+        // Properties
         public string Name { get; set; }
+        private Action<string> LogText { get; set; }
+        private bool GotDrink = false;
+        private bool IsSitting = false;
+        private bool IsDrinking = false;
 
         private readonly List<string> _namesList = new List<string>()
         {
