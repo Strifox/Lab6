@@ -21,8 +21,6 @@ namespace Lab6
 {
     public class Patron : Agents
     {
-        public bool isSitting = false;
-        public static bool gotDrink = false;
         //Delegates
         private Action<string, object> LogText { get; set; }
 
@@ -30,13 +28,10 @@ namespace Lab6
         private static readonly Random _random = new Random();
 
         // Class (static) Fields
-        public static int numOfGuests = 0;
+        public static int numOfGuests;
 
         // Properties
         public string Name { get; set; }
-        private bool GotDrink = false;
-        private bool IsSitting = false;
-        private bool IsDrinking = false;
 
         private readonly List<string> _namesList = new List<string>()
         {
@@ -65,27 +60,14 @@ namespace Lab6
         public void RunPatron(Action<string, object> logText)
         {
             LogText = logText;
-            if (!gotDrink && !BarQueue.Contains(this))
-                PatronEnters();
-            while (!gotDrink)
-            {
-                Thread.Sleep(100);
-            }
-
-            if (gotDrink && !isSitting)
-            {
-                PatronLookingForChair();
-                isSitting = true;
-            }
-            if (gotDrink && isSitting)
-            {
-                DrinksBeer();
-                PatronLeaves();
-            }
+            PatronEnters();
+            PatronLookingForChair();
+            DrinksBeer();
+            PatronLeaves();
         }
         private void PatronEnters()
         {
-            
+            numOfGuests ++;
             LogText?.Invoke($"{Name} enters the bar and walks up to the barqueue", this);
             Thread.Sleep(1000);
             Agents.BarQueue.TryAdd(this);
@@ -93,9 +75,8 @@ namespace Lab6
 
         public void PatronLookingForChair()
         {
-                var patron = Agents.ChairQueue.Take();
-                LogText?.Invoke($"{Name} letar efter stol!", this);
-                Thread.Sleep(4000);        
+            LogText?.Invoke($"{Name} letar efter stol!", this);
+            Thread.Sleep(4000);
         }
 
         private void DrinksBeer()
@@ -109,24 +90,14 @@ namespace Lab6
         {
             LogText($"{Name} leaves the bar!", this);
             MainWindow.chairs.itemQueue.Add(new Chair());
+            numOfGuests--;
         }
 
-        //public void PatronDrinks(Action<string> logText)
-        //{
-        //    LogText = logText;
-        //    logText?.Invoke($"{Name} sits down and drinks his beer");
-        //}
-
-        //public void PatronLeaves(Action<string> logText)
-        //{
-        //    LogText = logText;
-        //    logText?.Invoke($"{Name} has finished drinking and is now leaving the bar");
-        //}
+   
 
         public Patron()
         {
             Name = _namesList[_random.Next(_namesList.Count)];
-            numOfGuests += 1;
         }
 
     }

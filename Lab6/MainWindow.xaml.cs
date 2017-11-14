@@ -48,25 +48,22 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            Time.BarTimerStart();
+                Time.BarTimerStart();
             if (BtnOpenCloseBar.Content.ToString() == ("Open"))
 
                 BtnOpenCloseBar.Content = "Close";
             else
 
                 BtnOpenCloseBar.Content = "Open";
-            
+
             //BtnOpenCloseBar.Background
-            ChairLabel.Content = $"Number of chairs: {chairs.GetNumOfItems().ToString()}";
-            GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems().ToString()}";
-            GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests.ToString()}";
             Bouncer b = new Bouncer();
             Bartender bartender = new Bartender();
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
                 {
-                    b.Run(AddList); 
+                    b.Run(AddList);
                 }
             });
 
@@ -86,18 +83,21 @@ namespace Lab6
 
         private void AddList(string action, object sender)
         {
-            Patron s = new Patron();
-            Bartender b = new Bartender();
-            Waitress w = new Waitress();
             action = $"{increment++} {action}";
             Dispatcher.Invoke(() =>
             {
-                if (sender.GetType() == s.GetType())
-                    GuestListBox.Items.Insert(0, action);
-                if (sender.GetType() == b.GetType())
-                    BartenderListBox.Items.Insert(0, action);
-                if (sender.GetType() == w.GetType())
-                    WaiterListBox.Items.Insert(0, action);
+                switch (sender)
+                {
+                    case Patron _:
+                        GuestListBox.Items.Insert(0, action);
+                        break;
+                    case Bartender _:
+                        BartenderListBox.Items.Insert(0, action);
+                        break;
+                    case Waitress _:
+                        WaiterListBox.Items.Insert(0, action);
+                        break;
+                }
             });
         }
 
