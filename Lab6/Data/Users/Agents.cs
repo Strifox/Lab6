@@ -23,12 +23,9 @@ namespace Lab6
     public abstract class Agents
     {
         public static BlockingCollection<Patron> BarQueue = new BlockingCollection<Patron>();
+        public static BlockingCollection<Patron> ChairQueue = new BlockingCollection<Patron>();
+        //public abstract Bar BarStatus { get; set; }
 
-        public virtual string GetActions()
-        {
-            Console.WriteLine("Override this in inherited classes!");
-            return "A specific action!";
-        }
     }
 
 }

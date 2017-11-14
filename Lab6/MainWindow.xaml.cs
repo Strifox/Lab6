@@ -25,8 +25,8 @@ namespace Lab6
     public partial class MainWindow : Window
     {
         private int increment = 1;
-        private Items<Chair> chairs;
-        private Items<Glass> glasses;
+        public static Items<Chair> chairs;
+        public static Items<Glass> glasses;
 
         private static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct = cts.Token;
@@ -48,35 +48,70 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
+            Time.BarTimerStart();
+            if (BtnOpenCloseBar.Content.ToString() == ("Open"))
+
+                BtnOpenCloseBar.Content = "Close";
+            else
+
+                BtnOpenCloseBar.Content = "Open";
+            
+            //BtnOpenCloseBar.Background
             ChairLabel.Content = $"Number of chairs: {chairs.GetNumOfItems().ToString()}";
             GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems().ToString()}";
             GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests.ToString()}";
-            Time.BarTimerStart();
             Bouncer b = new Bouncer();
+            Bartender bartender = new Bartender();
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
                 {
-                    b.Run(AddList, NumOfGuests); 
+                    b.Run(AddList); 
                 }
             });
-        }
 
-        private void AddList(string obj)
-        {
-            obj = $"{increment++} {obj}";
-            Dispatcher.Invoke(() =>
+            Task.Run(() =>
             {
-                GuestListBox.Items.Insert(0, obj);
+                while (!ct.IsCancellationRequested)
+                {
+                    bartender.Handling(glasses, AddList);
+                }
+            });
+
+            Task.Run(() =>
+            {
+                UpdateLabels();
             });
         }
 
-        private void NumOfGuests()
+        private void AddList(string action, object sender)
         {
+            Patron s = new Patron();
+            Bartender b = new Bartender();
+            Waitress w = new Waitress();
+            action = $"{increment++} {action}";
             Dispatcher.Invoke(() =>
             {
-                GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests.ToString()}";
+                if (sender.GetType() == s.GetType())
+                    GuestListBox.Items.Insert(0, action);
+                if (sender.GetType() == b.GetType())
+                    BartenderListBox.Items.Insert(0, action);
+                if (sender.GetType() == w.GetType())
+                    WaiterListBox.Items.Insert(0, action);
             });
+        }
+
+        private void UpdateLabels()
+        {
+            while (!ct.IsCancellationRequested)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests.ToString()}";
+                    ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems().ToString()}";
+                    GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems().ToString()}";
+                });
+            }
         }
     }
 }

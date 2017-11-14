@@ -24,7 +24,38 @@ namespace Lab6
 
         public Bartender() : base()
         {
-            GetActions();
+        }
+
+        public void Handling(Items<Glass> glasses, Action<String, object> updateListBox)
+        {
+            if (BarQueue.Count > 0)
+            {
+                if (glasses.GetNumOfItems() > 0)
+                {
+
+                    updateListBox($"Plockar glas från hyllan", this);
+                    Thread.Sleep(3000);
+
+                    Agents.ChairQueue.Add(Agents.BarQueue.First());
+                    updateListBox($"Häller upp öl till {BarQueue.Take().Name}", this);
+                    Thread.Sleep(3000);
+                    Patron.gotDrink = true;
+                }
+
+                //else
+                //    listCallBack("Waiting for glass..");
+                
+                
+            }
+            //else
+            //    callback("Bartender's waiting for customers");
+            ////ConcurrentQueue<Patron> barQueue = new ConcurrentQueue<Patron>();
+            ////barQueue.Enqueue(new Patron());
+
+            ////if (barQueue.TryDequeue(out Patron result))
+            ////{
+            ////    result.Name;
+            ////}
         }
     }
 }

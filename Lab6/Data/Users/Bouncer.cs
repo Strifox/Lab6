@@ -28,14 +28,13 @@ namespace Lab6
             //BounceGuests();
         }
 
-        public void Run(Action<string> logText, Action numOfGuests)
+        public void Run(Action<string, object> logText)
         {
             Thread.Sleep(random.Next(3, 10) * 1000);
             Task.Run(() =>
             {
                 Patron p = new Patron();
-                numOfGuests();
-                p.PatronEnters(logText);
+                p.RunPatron(logText);
             });
 
         }
