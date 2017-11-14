@@ -24,11 +24,25 @@ namespace Lab6
 
         public Waitress() : base()
         {
-            GetActions();
         }
+        public void Handling(Items<UsedGlass> usedGlasses, Items<Chair> chairs, Action<string, object> updateListBox)
+        {       // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
+            if (usedGlasses.itemQueue.Count >= 4)
+            {
+                updateListBox("Picking up glasses", this);
+                Thread.Sleep(10000);
+                updateListBox("Cleaning glasses", this);
+                Thread.Sleep(15000);
 
-        public override Bar BarStatus { get; set; }
-        public override bool IsActive { get; set; }
-        public override Action Behaviour { get; set; }
+                for (int i = 0; i < 4; i++)
+                {
+                    MainWindow.glasses.itemQueue.Add(new Glass());
+                }
+                {
+
+                }
+            }
+
+        }
     }
 }

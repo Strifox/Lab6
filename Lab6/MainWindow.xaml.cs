@@ -24,13 +24,24 @@ namespace Lab6
     /// </summary>
     public partial class MainWindow : Window
     {
-
-     
         private int increment = 1;
+        public static Items<Chair> chairs;
+        public static Items<Glass> glasses;
+        public static Items<UsedGlass> usedGlasses;
+
+        private static CancellationTokenSource cts = new CancellationTokenSource();
+        public CancellationToken ct = cts.Token;
+
         public MainWindow()
         {
             InitializeComponent();
-            Items.CreateItems();
+
+            chairs = new Items<Chair>();
+            glasses = new Items<Glass>();
+            usedGlasses = new Items<UsedGlass>();
+
+            chairs.CreateItems(new Chair(), 8);
+            glasses.CreateItems(new Glass(), 9);
         }
 
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -39,21 +50,80 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            Time.BarTimerStart();
+                Time.BarTimerStart();
+            if (BtnOpenCloseBar.Content.ToString() == ("Open"))
+
+                BtnOpenCloseBar.Content = "Close";
+            else
+
+                BtnOpenCloseBar.Content = "Open";
+
+            //BtnOpenCloseBar.Background
             Bouncer b = new Bouncer();
+            Bartender bartender = new Bartender();
+            Waitress waitress = new Waitress();
             Task.Run(() =>
             {
-                b.Run(AddList);
+                while (!ct.IsCancellationRequested)
+                {
+                    b.Run(AddList);
+                }
+            });
+
+            Task.Run(() =>
+            {
+                while (!ct.IsCancellationRequested)
+                {
+                    bartender.Handling(glasses, AddList);
+                }
+            });
+
+            Task.Run(() =>
+            {
+                while (!ct.IsCancellationRequested)
+                {
+                    waitress.Handling(usedGlasses, chairs, AddList);
+                }
+            });
+
+            Task.Run(() =>
+            {
+                UpdateLabels();
+            });
+
+        }
+
+        private void AddList(string action, object sender)
+        {
+            action = $"{increment++} {action}";
+            Dispatcher.Invoke(() =>
+            {
+                switch (sender)
+                {
+                    case Patron _:
+                        GuestListBox.Items.Insert(0, action);
+                        break;
+                    case Bartender _:
+                        BartenderListBox.Items.Insert(0, action);
+                        break;
+                    case Waitress _:
+                        WaiterListBox.Items.Insert(0, action);
+                        break;
+                }
             });
         }
 
-        private void AddList(string obj)
+        private void UpdateLabels()
         {
-            obj = $"{increment++} {obj}";
-            Dispatcher.Invoke(() =>
+            while (!ct.IsCancellationRequested)
             {
-                GuestListBox.Items.Insert(0, obj);
-            });
+                Dispatcher.Invoke(() =>
+                {
+                    GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests.ToString()}";
+                    ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems().ToString()}";
+                    GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems().ToString()}";
+                });
+            }
         }
     }
 }
