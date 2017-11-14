@@ -22,7 +22,7 @@ namespace Lab6
     public class Patron : Agents
     {
         public bool isSitting = false;
-        public static bool gotDrink = false;
+        public bool gotDrink = false;
         //Delegates
         private Action<string, object> LogText { get; set; }
 
@@ -65,18 +65,27 @@ namespace Lab6
         public void RunPatron(Action<string, object> logText)
         {
             LogText = logText;
-            if (!gotDrink && !BarQueue.Contains(this))
-                PatronEnters();
-            while (!gotDrink)
-            {
-                Thread.Sleep(100);
-            }
+            //if (!gotDrink && !BarQueue.Contains(this))
+            PatronEnters();
+            //while (!gotDrink)
+            //{
+            //    Thread.Sleep(100);
+            //}
 
-            if (gotDrink && !isSitting)
-            {
-                PatronLookingForChair();
-                isSitting = true;
-            }
+            //if (gotDrink && !isSitting)
+            while (!ChairQueue.Contains(this))
+                Waiting(100);
+
+            PatronLookingForChair();
+            while (MainWindow.chairs.itemQueue.Count <= 0)
+                Waiting(100);
+
+            DrinksBeer();
+            PatronLeaves();
+
+
+            isSitting = true;
+            
             if (gotDrink && isSitting)
             {
                 DrinksBeer();
@@ -85,7 +94,6 @@ namespace Lab6
         }
         private void PatronEnters()
         {
-            
             LogText?.Invoke($"{Name} enters the bar and walks up to the barqueue", this);
             Thread.Sleep(1000);
             Agents.BarQueue.TryAdd(this);
@@ -93,7 +101,7 @@ namespace Lab6
 
         public void PatronLookingForChair()
         {
-                var patron = Agents.ChairQueue.Take();
+                Thread.Sleep(3000);
                 LogText?.Invoke($"{Name} letar efter stol!", this);
                 Thread.Sleep(4000);        
         }
@@ -109,6 +117,11 @@ namespace Lab6
         {
             LogText($"{Name} leaves the bar!", this);
             MainWindow.chairs.itemQueue.Add(new Chair());
+        }
+
+        private void Waiting(int time)
+        {
+            Thread.Sleep(time);
         }
 
         //public void PatronDrinks(Action<string> logText)

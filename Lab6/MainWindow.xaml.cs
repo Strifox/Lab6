@@ -86,18 +86,21 @@ namespace Lab6
 
         private void AddList(string action, object sender)
         {
-            Patron s = new Patron();
-            Bartender b = new Bartender();
-            Waitress w = new Waitress();
             action = $"{increment++} {action}";
             Dispatcher.Invoke(() =>
             {
-                if (sender.GetType() == s.GetType())
-                    GuestListBox.Items.Insert(0, action);
-                if (sender.GetType() == b.GetType())
-                    BartenderListBox.Items.Insert(0, action);
-                if (sender.GetType() == w.GetType())
-                    WaiterListBox.Items.Insert(0, action);
+                switch (sender)
+                {
+                    case Patron _:
+                        GuestListBox.Items.Insert(0, action);
+                        break;
+                    case Bartender _:
+                        BartenderListBox.Items.Insert(0, action);
+                        break;
+                    case Waitress _:
+                        WaiterListBox.Items.Insert(0, action);
+                        break;
+                }
             });
         }
 
