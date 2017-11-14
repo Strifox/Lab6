@@ -40,8 +40,8 @@ namespace Lab6
         #region Guest
 
         
-        public bool IsGuestInQueue(Patron guest) { return BarQueue.Contains(guest); }
-        public void AddGuestToQueue(Patron guest) { BarQueue.Enqueue(guest); }
+        public bool IsGuestInBarQueue(Patron guest) { return BarQueue.Contains(guest); }
+        public void AddGuestToBarQueue(Patron guest) { BarQueue.Enqueue(guest); }
         public Patron FirstInQueue()
         {
             while (!takeOrder)

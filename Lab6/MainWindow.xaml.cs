@@ -27,6 +27,7 @@ namespace Lab6
 
      
         private int increment = 1;
+
         public MainWindow()
         {
             InitializeComponent();
