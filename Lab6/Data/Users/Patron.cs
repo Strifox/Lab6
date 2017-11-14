@@ -65,6 +65,33 @@ namespace Lab6
             DrinksBeer();
             PatronLeaves();
         }
+            //if (!gotDrink && !BarQueue.Contains(this))
+            PatronEnters();
+            //while (!gotDrink)
+            //{
+            //    Thread.Sleep(100);
+            //}
+
+            //if (gotDrink && !isSitting)
+            while (!ChairQueue.Contains(this))
+                Waiting(100);
+
+            PatronLookingForChair();
+            while (MainWindow.chairs.itemQueue.Count <= 0)
+                Waiting(100);
+
+            DrinksBeer();
+            PatronLeaves();
+
+
+            isSitting = true;
+            
+            if (gotDrink && isSitting)
+            {
+                DrinksBeer();
+                PatronLeaves();
+            }
+        }
         private void PatronEnters()
         {
             numOfGuests ++;
@@ -75,8 +102,9 @@ namespace Lab6
 
         public void PatronLookingForChair()
         {
-            LogText?.Invoke($"{Name} letar efter stol!", this);
-            Thread.Sleep(4000);
+                Thread.Sleep(3000);
+                LogText?.Invoke($"{Name} letar efter stol!", this);
+                Thread.Sleep(4000);        
         }
 
         private void DrinksBeer()
@@ -93,7 +121,22 @@ namespace Lab6
             numOfGuests--;
         }
 
-   
+        private void Waiting(int time)
+        {
+            Thread.Sleep(time);
+        }
+
+        //public void PatronDrinks(Action<string> logText)
+        //{
+        //    LogText = logText;
+        //    logText?.Invoke($"{Name} sits down and drinks his beer");
+        //}
+
+        //public void PatronLeaves(Action<string> logText)
+        //{
+        //    LogText = logText;
+        //    logText?.Invoke($"{Name} has finished drinking and is now leaving the bar");
+        //}
 
         public Patron()
         {
