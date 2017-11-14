@@ -52,7 +52,6 @@ namespace Lab6
             obj = $"{increment++} {obj}";
             Dispatcher.Invoke(() =>
             {
-
                 GuestListBox.Items.Insert(0, obj);
             });
         }

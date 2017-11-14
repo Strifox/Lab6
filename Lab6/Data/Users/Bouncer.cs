@@ -29,7 +29,6 @@ namespace Lab6
 
         public void Run(Action<string> logText)
         {
-         
             while (!ct.IsCancellationRequested)
             {
                 Random random = new Random();
