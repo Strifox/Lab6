@@ -7,36 +7,35 @@ using System.Threading.Tasks;
 
 namespace Lab6
 {
-    public class Items
+    public class Items<T>
     {
+        public BlockingCollection<T> itemQueue = new BlockingCollection<T>();
 
-        public static void CreateItems()
-        {
-            int antalChairs = 100;
-            int antalGlass = 100;
-            
-            for(int i = 0; i < antalGlass; i++)
+        public void CreateItems(T item, int count)
+        {            
+            for(int i = 0; i < count; i++)
             {
-                GlassQueue.Add(new Glass());
-            }
-            for (int i = 0; i < antalChairs; i++)
-            {
-                ChairQueue.Add(new Chair());
+                itemQueue.Add(item);
             }
         }
 
-        public static BlockingCollection<Chair> ChairQueue = new BlockingCollection<Chair>();
-        
+        public int GetNumOfItems()
+        {
+            int n = 0;
+            for (int i = 1; i <= itemQueue.Count; i++)
+            {
+                n++;
+            }
+            return n;
+        }
 
-        public static BlockingCollection<Glass> GlassQueue = new BlockingCollection<Glass>();
     }
-
-    public class Chair : Items
+    public class Chair : Items<Chair>
     {
        // public int numOfChairs = 9;  
     }
 
-    public class Glass : Items
+    public class Glass : Items<Glass>
     {
        // public int numOfGlasses = 8;
     }

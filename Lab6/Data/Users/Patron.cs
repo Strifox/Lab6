@@ -21,28 +21,24 @@ namespace Lab6
 {
     public class Patron : Agents
     {
+        public bool isSitting = false;
+        public static bool gotDrink = false;
+        //Delegates
+        private Action<string, object> LogText { get; set; }
+
         // Fields
-        public static int NumOfGuests = 0;
-        private readonly Random _random = new Random();
+        private static readonly Random _random = new Random();
+
+        // Class (static) Fields
+        public static int numOfGuests = 0;
 
         // Properties
         public string Name { get; set; }
         private Action<string> LogText { get; set; }
         private bool GotDrink = false;
         private bool IsSitting = false;
+        private bool IsDrinking = false;
 
-        // Inherited abstract properties
-        public override Action Behaviour { get; set; }
-        public override Bar BarStatus { get; set; }
-        public override bool IsActive { get; set; }
-        public override void Deactive()
-        {
-            GotDrink = false;
-            IsSitting = false;
-            base.Deactive();
-        }
-
-        //BlockingCollection<string> behaviours { get; set; }
         private readonly List<string> _namesList = new List<string>()
         {
             "Andreas",
@@ -67,77 +63,71 @@ namespace Lab6
             "Jennie"
         };
 
-        public void RunPatron()
+        public void RunPatron(Action<string, object> logText)
         {
-            Task.Run( () =>
+            LogText = logText;
+            if (!gotDrink && !BarQueue.Contains(this))
+                PatronEnters();
+            while (!gotDrink)
             {
-                SetActive();
-                if (IsActive)
-                {
-                    if (GotDrink && !BarStatus.IsGuestInBarQueue(this))
-                    {
-                        BarStatus.AddGuestToBarQueue(this);
-                        PatronEnters();
-                    }
-                    while (!GotDrink)
-                    {
-                        Thread.Sleep(200);
-                    }
-                    if (GotDrink && !IsSitting)
-                    {
-                        PatronTakesBeerAndWaitForChair();
-                        while (!BarStatus.CanTakeChair)
-                        {
-                            Thread.Sleep(200);
-                        }
-                        PatronChair();
-                        BarStatus.TakeChair();
-                        IsSitting = true;
-                    }
-                    if (GotDrink && IsSitting)
-                    {
-                        PatronDrinks();
-                        PatronLeaves();
-                        BarStatus.ReturnChair();
-                        Deactive();
-                    }
-                }
-            });
+                Thread.Sleep(100);
+            }
+
+            if (gotDrink && !isSitting)
+            {
+                PatronLookingForChair();
+                isSitting = true;
+            }
+            if (gotDrink && isSitting)
+            {
+                DrinksBeer();
+                PatronLeaves();
+            }
         }
-        public void PatronEnters()
+        private void PatronEnters()
         {
-            Name = _namesList[_random.Next(_namesList.Count)];
-            LogText?.Invoke($"{Name} enters the bar and walks up to the barqueue\nThere are {BarStatus.guestsInBarQueue} people in queue");
+            
+            LogText?.Invoke($"{Name} enters the bar and walks up to the barqueue", this);
             Thread.Sleep(1000);
+            Agents.BarQueue.TryAdd(this);
         }
 
-        public void PatronTakesBeerAndWaitForChair()
+        public void PatronLookingForChair()
         {
-
-            LogText?.Invoke($"{Name} takes the beer from bartender and waits for an empty chair");
+                var patron = Agents.ChairQueue.Take();
+                LogText?.Invoke($"{Name} letar efter stol!", this);
+                Thread.Sleep(4000);        
         }
 
-        public void PatronChair()
+        private void DrinksBeer()
         {
-            LogText?.Invoke($"{Name} sits down on a chair");
-            Thread.Sleep(4000);
-        }
-
-        public void PatronDrinks()
-        {
-            LogText?.Invoke($"{Name}drinks his beer");
+            LogText($"{Name} sitter ner och dricker öl!", this);
+            MainWindow.chairs.itemQueue.Take();
             Thread.Sleep(_random.Next(10000, 20000));
         }
 
-        public void PatronLeaves()
+        private void PatronLeaves()
         {
-            LogText?.Invoke($"{Name} has finished drinking and is now leaving the bar");
+            LogText($"{Name} leaves the bar!", this);
+            MainWindow.chairs.itemQueue.Add(new Chair());
         }
 
-        public Patron(Action<string> logText)
+        //public void PatronDrinks(Action<string> logText)
+        //{
+        //    LogText = logText;
+        //    logText?.Invoke($"{Name} sits down and drinks his beer");
+        //}
+
+        //public void PatronLeaves(Action<string> logText)
+        //{
+        //    LogText = logText;
+        //    logText?.Invoke($"{Name} has finished drinking and is now leaving the bar");
+        //}
+
+        public Patron()
         {
-            LogText = logText;
-            RunPatron();
+            Name = _namesList[_random.Next(_namesList.Count)];
+            numOfGuests += 1;
         }
 
     }

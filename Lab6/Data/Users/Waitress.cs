@@ -24,7 +24,7 @@ namespace Lab6
 
         public Waitress() : base()
         {
-            GetActions();
+
         }
 
         public override Bar BarStatus { get; set; }
