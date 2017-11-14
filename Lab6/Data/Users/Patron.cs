@@ -87,6 +87,8 @@ namespace Lab6
             LogText($"{Name} sitter ner och dricker öl!", this);
             MainWindow.chairs.itemQueue.Take();
             Thread.Sleep(_random.Next(10000, 20000));
+            MainWindow.usedGlasses.itemQueue.Add(new UsedGlass());
+
         }
         private void PatronLeaves()
         {

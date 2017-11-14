@@ -27,6 +27,7 @@ namespace Lab6
         private int increment = 1;
         public static Items<Chair> chairs;
         public static Items<Glass> glasses;
+        public static Items<UsedGlass> usedGlasses;
 
         private static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct = cts.Token;
@@ -37,6 +38,7 @@ namespace Lab6
 
             chairs = new Items<Chair>();
             glasses = new Items<Glass>();
+            usedGlasses = new Items<UsedGlass>();
 
             chairs.CreateItems(new Chair(), 8);
             glasses.CreateItems(new Glass(), 9);
@@ -59,6 +61,7 @@ namespace Lab6
             //BtnOpenCloseBar.Background
             Bouncer b = new Bouncer();
             Bartender bartender = new Bartender();
+            Waitress waitress = new Waitress();
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
@@ -77,8 +80,17 @@ namespace Lab6
 
             Task.Run(() =>
             {
+                while (!ct.IsCancellationRequested)
+                {
+                    waitress.Handling(usedGlasses, chairs, AddList);
+                }
+            });
+
+            Task.Run(() =>
+            {
                 UpdateLabels();
             });
+
         }
 
         private void AddList(string action, object sender)

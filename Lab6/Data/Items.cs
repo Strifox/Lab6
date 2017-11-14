@@ -39,5 +39,10 @@ namespace Lab6
     {
        // public int numOfGlasses = 8;
     }
+
+    public class UsedGlass : Items<UsedGlass>
+    {
+
+    }
 }
 
