@@ -64,7 +64,7 @@ namespace Lab6
             while (!ChairQueue.Contains(this))
                 Waiting(100);
             PatronLookingForChair();
-            while (MainWindow.chairs.itemQueue.Count <= 0)
+            while (MainWindow.chairs.ItemQueue.Count <= 0)
                 Waiting(100);
             DrinksBeer();
             PatronLeaves();
@@ -85,15 +85,15 @@ namespace Lab6
         private void DrinksBeer()
         {
             LogText($"{Name} sitter ner och dricker öl!", this);
-            MainWindow.chairs.itemQueue.Take();
+            MainWindow.chairs.ItemQueue.Take();
             Thread.Sleep(_random.Next(10000, 20000));
-            MainWindow.usedGlasses.itemQueue.Add(new UsedGlass());
+            MainWindow.usedGlasses.ItemQueue.Add(new UsedGlass());
 
         }
         private void PatronLeaves()
         {
             LogText($"{Name} leaves the bar!", this);
-            MainWindow.chairs.itemQueue.Add(new Chair());
+            MainWindow.chairs.ItemQueue.Add(new Chair());
             numOfGuests--;
         }
         private void Waiting(int time)

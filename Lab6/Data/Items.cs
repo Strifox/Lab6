@@ -9,20 +9,20 @@ namespace Lab6
 {
     public class Items<T>
     {
-        public BlockingCollection<T> itemQueue = new BlockingCollection<T>();
+        public BlockingCollection<T> ItemQueue = new BlockingCollection<T>();
 
         public void CreateItems(T item, int count)
         {            
             for(int i = 0; i < count; i++)
             {
-                itemQueue.Add(item);
+                ItemQueue.Add(item);
             }
         }
 
         public int GetNumOfItems()
         {
             int n = 0;
-            for (int i = 1; i <= itemQueue.Count; i++)
+            for (int i = 1; i <= ItemQueue.Count; i++)
             {
                 n++;
             }

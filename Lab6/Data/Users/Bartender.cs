@@ -42,7 +42,7 @@ namespace Lab6
                 {
                     updateListBox($"Plockar glas från hyllan", this);
                     Thread.Sleep(3000);
-                    glasses.itemQueue.Take();
+                    glasses.ItemQueue.Take();
                     Agents.ChairQueue.Add(Agents.BarQueue.First());
                     updateListBox($"Häller upp öl till {BarQueue.Take().Name}", this);
                     Thread.Sleep(3000);
