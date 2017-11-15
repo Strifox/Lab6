@@ -1,31 +1,55 @@
 ﻿using System;
+using System.Reflection.Emit;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Label = System.Windows.Controls.Label;
 
 
 namespace Lab6
 {
-    public static class Time
+    public class Time
     {
-        static MainWindow Form = Application.Current.MainWindow as MainWindow;
-        private static int increment;
-        public static int Increment { get { return increment; } set { increment = value; } }
-        public static void BarTimerStart()
+        public Action<bool> CheckTimer { get; set; }
+        public int? RunTime { get; set; }
+        public int? CurrentTime { get; set; }
+        public void RunTimer(int runTime, Label timeLabel)
         {
-
-            DispatcherTimer barTimer = new DispatcherTimer()
+            if (CurrentTime != null && CheckTimer != null)
             {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-            barTimer.Tick += BarTimerTicker;
-            barTimer.Start();
+                Task.Factory.StartNew(() =>
+                {
+                        for (var second = 0; second < runTime; second++)
+                        {
+                            Thread.Sleep(10);
+                            CurrentTime = second;
+                            timeLabel.Content = CurrentTime.ToString();
+                        }
+                    CheckTimer(false);
+                });
+            }
         }
 
-        private static void BarTimerTicker(object sender, EventArgs e)
-        {
-            increment++;
-            Form.TimerLabel.Content = increment.ToString();
-        }
+        //private int increment;
+        //public  int Increment { get { return increment; } set { increment = value; } }
+        //public Label TimeLabel { get; set; }
+        //public  void BarTimerStart()
+        //{
 
+        //    DispatcherTimer barTimer = new DispatcherTimer()
+        //    {
+        //        Interval = TimeSpan.FromSeconds(1)
+        //    };
+        //    barTimer.Tick += BarTimerTicker;
+        //    barTimer.Start();
+        //}
+
+        //private void BarTimerTicker(object sender, EventArgs e)
+        //{
+        //    increment++;
+        //    TimeLabel.Content = increment.ToString();
+
+        //}
     }
 }

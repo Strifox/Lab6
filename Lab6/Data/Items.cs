@@ -17,14 +17,14 @@ namespace Lab6
         {            
             for(int i = 0; i < count; i++)
             {
-                itemQueue.Add(item);
+                ItemQueue.Add(item);
             }
         }
 
         public int GetNumOfItems()
         {
             int n = 0;
-            for (int i = 1; i <= itemQueue.Count; i++)
+            for (int i = 1; i <= ItemQueue.Count; i++)
             {
                 n++;
             }
