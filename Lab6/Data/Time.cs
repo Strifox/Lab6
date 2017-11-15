@@ -12,7 +12,6 @@ namespace Lab6
     public class Time
     {
         public Action<bool> CheckTimer { get; set; }
-        public int? RunTime { get; set; }
         public int? CurrentTime { get; set; }
         public void RunTimer(int runTime, Label timeLabel)
         {
@@ -20,6 +19,7 @@ namespace Lab6
             {
                 Task.Factory.StartNew(() =>
                 {
+                    
                         for (var second = 0; second < runTime; second++)
                         {
                             Thread.Sleep(10);

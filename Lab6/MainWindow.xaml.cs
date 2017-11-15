@@ -59,7 +59,7 @@ namespace Lab6
 
             Bouncer b = new Bouncer();
             Bartender bartender = new Bartender();
-            Waitress waitress = new Waitress(10000, 15000);
+            Waitress waitress = new Waitress(10000, 12000, 3000);
 
             // Bouncer/Patron Thread
             Task.Run(() =>
