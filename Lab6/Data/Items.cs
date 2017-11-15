@@ -17,14 +17,14 @@ namespace Lab6
         {            
             for(int i = 0; i < count; i++)
             {
-                ItemQueue.Add(item);
+                itemQueue.Add(item);
             }
         }
 
         public int GetNumOfItems()
         {
             int n = 0;
-            for (int i = 1; i <= ItemQueue.Count; i++)
+            for (int i = 1; i <= itemQueue.Count; i++)
             {
                 n++;
             }
@@ -35,7 +35,6 @@ namespace Lab6
         {
             item = new T();
         }
-
     }
     public class Chair
     {
