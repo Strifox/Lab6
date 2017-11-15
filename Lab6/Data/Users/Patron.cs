@@ -25,11 +25,10 @@ namespace Lab6
         private Action<string, object> LogText { get; set; }
 
         // Fields
+        private int stayDuration;
         private static readonly Random _random = new Random();
-
-        // Class (static) Fields
         public static int numOfGuests;
-
+         
         // Properties
         public string Name { get; set; }
 
@@ -62,10 +61,10 @@ namespace Lab6
             LogText = logText;
             PatronEnters();
             while (!ChairQueue.Contains(this))
-                Waiting(100);
+                Thread.Sleep(100);
             PatronLookingForChair();
             while (MainWindow.chairs.itemQueue.Count <= 0)
-                Waiting(100);
+                Thread.Sleep(100);
             DrinksBeer();
             PatronLeaves();
         }
@@ -86,7 +85,7 @@ namespace Lab6
         {
             LogText($"{Name} sitter ner och dricker öl!", this);
             MainWindow.chairs.itemQueue.Take();
-            Thread.Sleep(_random.Next(10000, 20000));
+            Thread.Sleep(stayDuration);
             MainWindow.usedGlasses.itemQueue.Add(new UsedGlass());
 
         }
@@ -96,13 +95,11 @@ namespace Lab6
             MainWindow.chairs.itemQueue.Add(new Chair());
             numOfGuests--;
         }
-        private void Waiting(int time)
-        {
-            Thread.Sleep(time);
-        }
-        public Patron()
+        
+        public Patron(int minTime, int maxTime)
         {
             Name = _namesList[_random.Next(_namesList.Count)];
+            stayDuration = _random.Next(minTime, maxTime);
         }
     }
 

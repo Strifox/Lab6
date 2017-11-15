@@ -36,32 +36,32 @@ namespace Lab6
         {
             InitializeComponent();
 
+            // instantiate the generic Item variables
             chairs = new Items<Chair>();
             glasses = new Items<Glass>();
             usedGlasses = new Items<UsedGlass>();
 
-            chairs.CreateItems(new Chair(), 8);
-            glasses.CreateItems(new Glass(), 9);
-        }
+            usedGlasses.item.maxNumOfUsedGlasses = glasses.item.maxNumOfGlasses;
 
-        private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            // Creating x amounts of items through function call.
+            chairs.CreateItems(new Chair(), chairs.item.maxNumOfChairs);
+            glasses.CreateItems(new Glass(), glasses.item.maxNumOfGlasses);
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-                Time.BarTimerStart();
+            Time.BarTimerStart();
             if (BtnOpenCloseBar.Content.ToString() == ("Open"))
-
                 BtnOpenCloseBar.Content = "Close";
-            else
 
+            else
                 BtnOpenCloseBar.Content = "Open";
 
-            //BtnOpenCloseBar.Background
             Bouncer b = new Bouncer();
             Bartender bartender = new Bartender();
-            Waitress waitress = new Waitress();
+            Waitress waitress = new Waitress(10000, 15000);
+
+            // Bouncer/Patron Thread
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
@@ -70,6 +70,7 @@ namespace Lab6
                 }
             });
 
+            // Bartender Thread
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
@@ -78,6 +79,7 @@ namespace Lab6
                 }
             });
 
+            // Waitress Thread
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
@@ -90,7 +92,6 @@ namespace Lab6
             {
                 UpdateLabels();
             });
-
         }
 
         private void AddList(string action, object sender)
@@ -124,6 +125,10 @@ namespace Lab6
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems().ToString()}";
                 });
             }
+        }
+
+        private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
         }
     }
 }

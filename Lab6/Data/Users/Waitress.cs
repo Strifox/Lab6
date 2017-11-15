@@ -21,28 +21,37 @@ namespace Lab6
 {
     public class Waitress : Agents
     {
+        private int CollectDuration { get; set; }
+        private int WashingDuration { get; set; }
 
-        public Waitress() : base()
-        {
-        }
         public void Handling(Items<UsedGlass> usedGlasses, Items<Chair> chairs, Action<string, object> updateListBox)
         {       // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
-            if (usedGlasses.itemQueue.Count >= 4)
+            if (usedGlasses.itemQueue.Count > 0)
             {
                 updateListBox("Picking up glasses", this);
-                Thread.Sleep(10000);
+                Thread.Sleep(CollectDuration);
                 updateListBox("Cleaning glasses", this);
-                Thread.Sleep(15000);
-
-                for (int i = 0; i < 4; i++)
+                Thread.Sleep(WashingDuration);
+                foreach (var usedGlass in usedGlasses.itemQueue)
                 {
+                    usedGlasses.itemQueue.Take();
                     MainWindow.glasses.itemQueue.Add(new Glass());
-                }
-                {
-
                 }
             }
 
+            else
+            {
+                updateListBox("Waiting", this);
+                while (!usedGlasses.itemQueue.Any())
+                    Thread.Sleep(100);
+            }
         }
+
+        public Waitress(int collectDuration, int washingDuration) : base()
+        {
+             CollectDuration = collectDuration;
+             WashingDuration = washingDuration;
+        }
+
     }
 }
