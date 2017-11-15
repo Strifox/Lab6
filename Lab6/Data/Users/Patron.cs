@@ -92,7 +92,7 @@ namespace Lab6
         private void PatronLeaves()
         {
             LogText($"{Name} leaves the bar!", this);
-            MainWindow.chairs.ItemQueue.Add(new Chair());
+            MainWindow.chairs.itemQueue.Add(new Chair());
             numOfGuests--;
         }
         
