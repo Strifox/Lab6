@@ -29,7 +29,7 @@ namespace Lab6
         public static Items<Glass> glasses;
         public static Items<UsedGlass> usedGlasses;
         private static CancellationTokenSource cts = new CancellationTokenSource();
-        private static CancellationToken ct = cts.Token;
+        public CancellationToken ct = cts.Token;
 
         public MainWindow()
         {
@@ -49,9 +49,6 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            BtnOpenCloseBar.IsEnabled = false;
-            BtnStop.IsEnabled = true;
-            
             //Bar timer. 
             Time.RunTimer(120);
 
@@ -67,11 +64,7 @@ namespace Lab6
             });
 
             // Bartender Thread
-            Task.Run(() =>
-            {  
-                bartender.Handling(glasses, AddList, ct);
-            });
-
+            Task.Run(() => { { bartender.Handling(glasses, AddList, ct); } });
             // Waitress Thread
             Task.Run(() =>
             {   
@@ -85,6 +78,7 @@ namespace Lab6
             });
         }
 
+      
         private void AddList(string action, object sender)
         {
             action = $"{increment++} {action}";
@@ -108,6 +102,7 @@ namespace Lab6
             });
         }
 
+        // Update labels
         private void UpdateLabels()
         {
             while (!ct.IsCancellationRequested)
@@ -121,6 +116,7 @@ namespace Lab6
                 });
                 Thread.Sleep(10);
             }
+        }
 
             Dispatcher.Invoke(() =>
             {
@@ -132,7 +128,6 @@ namespace Lab6
         }
         private void SimulationSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // Reglerar simulationshastigheten
             Agents.SpeedModifier = Convert.ToInt32(SimulationSpeed.Value);
         }
 
