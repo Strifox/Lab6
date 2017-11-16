@@ -29,7 +29,7 @@ namespace Lab6
             {
                 if (Time.CurrentTime <= 0)
                 {
-                    updateListBox($"Baren är nu stängd och bartender går hem", this);
+                    updateListBox($"Bar kön är tom, stänger baren", this);
                     while (BarQueue.Count == 0 && Time.CurrentTime == 0)
                         Thread.Sleep(10);
                 }

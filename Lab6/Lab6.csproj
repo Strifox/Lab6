@@ -54,7 +54,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\Users\Bar.cs" />
     <Compile Include="Data\Users\Bouncer.cs" />
     <Compile Include="Data\Items.cs" />
     <Compile Include="Data\Users\Patron.cs" />

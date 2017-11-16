@@ -50,7 +50,7 @@ namespace Lab6
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
             //Bar timer. 
-            Time.RunTimer(20);
+            Time.RunTimer(5);
 
             if (BtnOpenCloseBar.Content.ToString() == ("Open"))
                 BtnOpenCloseBar.Content = "Close";
@@ -125,7 +125,7 @@ namespace Lab6
             {
                 Dispatcher.Invoke(() =>
                 {
-                    GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests}";
+                    GuestLabel1.Content = $"Number of guests: {Patron.NumOfGuests}";
                     ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems()}";
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems()}";
                     TimerLabel.Content = Time.CurrentTime;
