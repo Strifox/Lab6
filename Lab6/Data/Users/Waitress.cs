@@ -33,26 +33,32 @@ namespace Lab6
             if (usedGlasses.itemQueue.Count > 0)
             {
                 updateListBox("Plockar tomma glas", this);
-                Thread.Sleep(CollectDuration);
+                Waiting(CollectDuration);
                 updateListBox("Rengör glasen", this);
-                Thread.Sleep(WashingDuration);
+                Waiting(WashingDuration);
                 updateListBox("Lägger tillbaka glasen i hyllan", this);
-                Thread.Sleep(AddToShelfDuration);
+                Waiting(AddToShelfDuration);
                 foreach (var usedGlass in usedGlasses.itemQueue)
                 {
                     usedGlasses.itemQueue.Take();
-                    MainWindow.glasses.itemQueue.Add(new Glass());
+                    glasses.itemQueue.Add(new Glass());
                 }
             }
             if (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 &&
                 Time.CurrentTime == 0)
             {
-                updateListBox("Alla glasen är rena och alla gäster har gått, servitrisen går nu hem", this);
-                while (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 &&
-                       Time.CurrentTime == 0)
-                {
+                updateListBox("Väntar på disk", this);
+                while (!usedGlasses.itemQueue.Any())
                     Thread.Sleep(100);
-                }
+            }
+
+            if (ChairQueue.Count == chairs.item.maxNumOfChairs  && usedGlasses.itemQueue.Count == 0 && Time.CurrentTime == 0)
+            {
+                updateListBox("Alla glasen är rena och alla gäster har gått, servitrisen går nu hem",   this);
+                while (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 && Time.CurrentTime == 0)
+                    {
+                        Thread.Sleep(100);
+                    }
             }
             if (usedGlasses.itemQueue.Count == 0)
             {

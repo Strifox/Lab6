@@ -6,13 +6,7 @@
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
         Title="MainWindow" Height="533.237" Width="944.966">
-    <Grid Margin="0,0,-8,-4">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF23509E" Offset="0"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Margin="0,0,-8,-4" Background="#FF25374B">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="170*"/>
@@ -33,6 +27,7 @@
         <Label x:Name="ChairLabel" Content="" HorizontalAlignment="Left" Margin="441.982,96,0,0" VerticalAlignment="Top" Height="58" Width="146" Grid.Column="2"/>
         <Label x:Name="GlassLabel" Content="" HorizontalAlignment="Left" Margin="441.982,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.029" Height="57" Width="146" Grid.Column="2"/>
         <Label x:Name="GuestLabel1" Content="" HorizontalAlignment="Left" Margin="441.982,221,0,0" VerticalAlignment="Top" Height="66" Width="146" Grid.Column="2"/>
+        <Slider x:Name="SimulationSpeed" Grid.Column="2" HorizontalAlignment="Left" Margin="450.5,415,0,0" VerticalAlignment="Top" Height="25" Width="244" RenderTransformOrigin="0.788,0.73" ValueChanged="SimulationSpeed_ValueChanged" Minimum="1" Maximum="5" SmallChange="6" IsSnapToTickEnabled="True"/>
 
     </Grid>
 </Window>

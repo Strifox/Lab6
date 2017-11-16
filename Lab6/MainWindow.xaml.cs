@@ -85,7 +85,7 @@ namespace Lab6
             {
                 while (!ct.IsCancellationRequested)
                 {
-                    waitress.Handling(usedGlasses, chairs, AddList);
+                    waitress.Handling(usedGlasses, glasses, chairs, AddList);
                 }
             });
 
@@ -130,9 +130,15 @@ namespace Lab6
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems()}";
                     TimerLabel.Content = Time.CurrentTime;
                 });
+                Thread.Sleep(10);
+                
             }
         }
 
+        private void SimulationSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Agents.SpeedModifier = Convert.ToInt32(SimulationSpeed.Value);
+        }
     }
 }
 

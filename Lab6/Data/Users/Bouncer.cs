@@ -30,15 +30,14 @@ namespace Lab6
 
         public Bouncer() : base()
         {
-
         }
 
         //Method to create Patrons and also to stop creating Patrons.
         public void Run(Action<string, object> logText)
         {
-            while (Time.CurrentTime > 0)
+            if (Time.CurrentTime > 0)
             {
-                Thread.Sleep(random.Next(3, 10) * 1000); //Creates patron every 3-10 second
+                Waiting(random.Next(3000, 10000)); //Creates patron every 3-10 second
                 Task.Run(() =>
                 {
                     Patron p = new Patron(10000, 20000); 
