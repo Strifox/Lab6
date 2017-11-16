@@ -22,7 +22,7 @@
         <Button x:Name="BtnPauseWaiter" Content="Pause" HorizontalAlignment="Left" Margin="6.982,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False" Grid.Column="2"/>
         <Button x:Name="BtnPauseGuests" Content="Pause" HorizontalAlignment="Left" Margin="186.982,272,0,0" VerticalAlignment="Top" Width="245" Height="38" IsEnabled="False" Grid.Column="2"/>
         <Button x:Name="BtnOpenCloseBar" Content="Open" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="274" Height="70" Click="BtnOpenCloseBar_Click" Grid.ColumnSpan="3" Background="#FF29DC24" BorderBrush="#FF1EE030" Foreground="Black"/>
-        <Button x:Name="BtnStop" Content="STOP" HorizontalAlignment="Left" Margin="181.982,366,0,0" VerticalAlignment="Top" Width="170" Height="70" Grid.Column="2" BorderBrush="White" Foreground="White" Background="#FFCD3E3E" IsEnabled="False"/>
+        <Button x:Name="BtnStop" Content="STOP" HorizontalAlignment="Left" Margin="181.982,366,0,0" VerticalAlignment="Top" Width="170" Height="70" Grid.Column="2" BorderBrush="White" Foreground="White" Background="#FFCD3E3E" IsEnabled="False" Click="BtnStop_Click"/>
         <Label x:Name="TimerLabel" HorizontalAlignment="Left" Margin="586.982,29,0,0" VerticalAlignment="Top" Width="118" Height="41" Content="" Grid.Column="2"/>
         <Label x:Name="ChairLabel" Content="" HorizontalAlignment="Left" Margin="441.982,96,0,0" VerticalAlignment="Top" Height="58" Width="146" Grid.Column="2"/>
         <Label x:Name="GlassLabel" Content="" HorizontalAlignment="Left" Margin="441.982,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.029" Height="57" Width="146" Grid.Column="2"/>

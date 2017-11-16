@@ -33,24 +33,30 @@ namespace Lab6
         }
 
         //Method to create Patrons and also to stop creating Patrons.
-        public void Run(Action<string, object> logText)
+        public void Run(Action<string, object> logText, CancellationToken ct)
         {
-            if (Time.CurrentTime > 0)
+            while (!ct.IsCancellationRequested)
             {
-                Waiting(random.Next(3000, 10000)); //Creates patron every 3-10 second
-                Task.Run(() =>
+                if (Time.CurrentTime > 0)
                 {
-                    Patron p = new Patron(10000, 20000); 
-                    p.RunPatron(logText);
-                });
-            }
-            if (Time.CurrentTime == 0)
-            {
-                Logtext = logText;
-                Logtext?.Invoke($"INKASTAREN HAR SLUTAT SLÄPPA IN GÄSTER", this);
-                while (Time.CurrentTime == 0)
+                    Waiting(random.Next(3000, 10000)); //Creates patron every 3-10 second
+                    {
+                        Task.Run(() =>
+                        {
+                            Patron p = new Patron(10000, 20000);
+                            p.RunPatron(logText);
+                        });
+                    }
+                }
+
+                else if (Time.CurrentTime == 0)
                 {
-                    Thread.Sleep(10);
+                    Logtext = logText;
+                    Logtext?.Invoke($"INKASTAREN HAR SLUTAT SLÄPPA IN GÄSTER", this);
+                    while (Time.CurrentTime == 0)
+                    {
+                        Thread.Sleep(10);
+                    }
                 }
             }
         }

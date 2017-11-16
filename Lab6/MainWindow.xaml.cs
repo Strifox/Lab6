@@ -29,7 +29,7 @@ namespace Lab6
         public static Items<Glass> glasses;
         public static Items<UsedGlass> usedGlasses;
         private static CancellationTokenSource cts = new CancellationTokenSource();
-        public CancellationToken ct = cts.Token;
+        private static CancellationToken ct = cts.Token;
 
         public MainWindow()
         {
@@ -49,44 +49,33 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
+            BtnOpenCloseBar.IsEnabled = false;
+            BtnStop.IsEnabled = true;
+            
             //Bar timer. 
             Time.RunTimer(20);
 
-            if (BtnOpenCloseBar.Content.ToString() == ("Open"))
-                BtnOpenCloseBar.Content = "Close";
-
-            else
-                BtnOpenCloseBar.Content = "Open";
-
-            Bouncer b = new Bouncer();
+            // Instantiate all the agents. Patrons is later created in the bouncer instance method
+            Bouncer bouncer = new Bouncer();
             Bartender bartender = new Bartender();
             Waitress waitress = new Waitress(10000, 12000, 3000);
 
             // Bouncer/Patron Thread
             Task.Run(() =>
             {
-                while (!ct.IsCancellationRequested)
-                {
-                    b.Run(AddList);
-                }
+                bouncer.Run(AddList, ct);
             });
 
             // Bartender Thread
             Task.Run(() =>
-            {
-                while (!ct.IsCancellationRequested)
-                {
-                    bartender.Handling(glasses, AddList);
-                }
+            {  
+                bartender.Handling(glasses, AddList, ct);
             });
 
             // Waitress Thread
             Task.Run(() =>
-            {
-                while (!ct.IsCancellationRequested)
-                {
-                    waitress.Handling(usedGlasses, glasses, chairs, AddList);
-                }
+            {   
+                waitress.Handling(usedGlasses, glasses, chairs, AddList, ct);
             });
 
             Task.Run(() =>
@@ -131,13 +120,32 @@ namespace Lab6
                     TimerLabel.Content = Time.CurrentTime;
                 });
                 Thread.Sleep(10);
-                
             }
-        }
 
+            Dispatcher.Invoke(() =>
+            {
+                GuestLabel1.Content = "";
+                ChairLabel.Content = "";
+                GlassLabel.Content = "";
+                TimerLabel.Content = "";
+            });
+            
+
+        }
         private void SimulationSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            // Reglerar simulationshastigheten
             Agents.SpeedModifier = Convert.ToInt32(SimulationSpeed.Value);
+        }
+
+        private void BtnStop_Click(object sender, RoutedEventArgs e)
+        {
+            BtnOpenCloseBar.IsEnabled = true;
+            BtnStop.IsEnabled = false;
+            GuestListBox.Items.Clear();
+            BartenderListBox.Items.Clear();
+            WaiterListBox.Items.Clear();
+            cts.Cancel();
         }
     }
 }

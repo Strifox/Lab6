@@ -22,48 +22,49 @@ namespace Lab6
     public class Bartender : Agents
     {
 
-        public void Handling(Items<Glass> glasses, Action<String, object> updateListBox)
+        public void Handling(Items<Glass> glasses, Action<String, object> updateListBox, CancellationToken ct)
         {
-            //If statement to check if barqueue is empty
-            if (BarQueue.Count == 0)
+            while (!ct.IsCancellationRequested)
             {
-                if (Time.CurrentTime <= 0)
+                //If statement to check if barqueue is empty
+                if (BarQueue.Count == 0)
                 {
-                    updateListBox($"Baren är nu stängd och bartender går hem", this);
-                    while (BarQueue.Count == 0 && Time.CurrentTime == 0)
-                        Thread.Sleep(10);
+                    if (Time.CurrentTime <= 0)
+                    {
+                        updateListBox($"Baren är nu stängd och bartender går hem", this);
+                        while (BarQueue.Count == 0 && Time.CurrentTime == 0)
+                            Thread.Sleep(10);
+                    }
+                    updateListBox($"Väntar på gäst", this); // updates bartenderlistbox with this statement if queue is empty.
+                    while (BarQueue.Count == 0)
+                        Thread.Sleep(100);
                 }
-                updateListBox($"Väntar på gäst", this); // updates bartenderlistbox with this statement if queue is empty.
-                while (BarQueue.Count == 0)
-                    Thread.Sleep(100);
-            }
 
-            //If statement to check if glass collection is empty
-            if (glasses.GetNumOfItems() == 0)
-            {
-                updateListBox("waiting for glass", this); // updates bartenderlistbox with this statement if collection is empty.
-                while (glasses.GetNumOfItems() == 0)
-                    Thread.Sleep(100);
-            }
-
-            //if statement to check if barqueue and glass collection is not empty.
-            if (BarQueue.Count > 0)
-            {
-                if (glasses.GetNumOfItems() > 0)
+                //If statement to check if glass collection is empty
+                if (glasses.GetNumOfItems() == 0)
                 {
-                    updateListBox($"Plockar glas från hyllan", this); // updates bartenderlistbox with this statement if it is not empty
-                    Waiting(3000);
-                    glasses.itemQueue.Take();
-                    Agents.ChairQueue.Add(Agents.BarQueue.First());
-                    updateListBox($"Häller upp öl till {BarQueue.Take().Name}", this); // updates with this statement if glass collection is not empty. Also removes guest from Barqueue.
-                    Waiting(4000);
+                    updateListBox("waiting for glass", this); // updates bartenderlistbox with this statement if collection is empty.
+                    while (glasses.GetNumOfItems() == 0)
+                        Thread.Sleep(100);
                 }
-            }
-            
+
+                //if statement to check if barqueue and glass collection is not empty.
+                if (BarQueue.Count > 0)
+                {
+                    if (glasses.GetNumOfItems() > 0)
+                    {
+                        updateListBox($"Plockar glas från hyllan", this); // updates bartenderlistbox with this statement if it is not empty
+                        Waiting(3000);
+                        glasses.itemQueue.Take();
+                        Agents.ChairQueue.Add(Agents.BarQueue.First());
+                        updateListBox($"Häller upp öl till {BarQueue.Take().Name}", this); // updates with this statement if glass collection is not empty. Also removes guest from Barqueue.
+                        Waiting(4000);
+                    }
+                }
+            }  
         }
 
         public Bartender() : base()
-        {
-        }
+        { }
     }
 }
