@@ -53,7 +53,7 @@ namespace Lab6
             BtnStop.IsEnabled = true;
             
             //Bar timer. 
-            Time.RunTimer(5);
+            Time.RunTimer(120);
 
             // Instantiate all the agents. Patrons is later created in the bouncer instance method
             Bouncer bouncer = new Bouncer();
@@ -78,13 +78,13 @@ namespace Lab6
                 waitress.Handling(usedGlasses, glasses, chairs, AddList, ct);
             });
 
+            // Label Thread
             Task.Run(() =>
             {
                 UpdateLabels();
             });
         }
 
-      
         private void AddList(string action, object sender)
         {
             action = $"{increment++} {action}";
@@ -129,8 +129,6 @@ namespace Lab6
                 GlassLabel.Content = "";
                 TimerLabel.Content = "";
             });
-            
-
         }
         private void SimulationSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
