@@ -24,16 +24,23 @@ namespace Lab6
         public void Handling(Items<Glass> glasses, Action<String, object> updateListBox)
         {
             if (BarQueue.Count == 0)
+            {
                 updateListBox($"Väntar på gäst", this);
-            while (BarQueue.Count == 0)
-                Thread.Sleep(100);
+                while (BarQueue.Count == 0)
+                    Thread.Sleep(100);
+            }
+
+            if (glasses.GetNumOfItems() == 0)
+            {
+                updateListBox("waiting for glass", this);
+                while (glasses.GetNumOfItems() == 0)
+                    Thread.Sleep(100);
+            }
             if (BarQueue.Count > 0)
             {
                 if (glasses.GetNumOfItems() > 0)
                 {
-
                     updateListBox($"Plockar glas från hyllan", this);
-                    glasses.itemQueue.Take();
                     Thread.Sleep(3000);
                     glasses.itemQueue.Take();
                     Agents.ChairQueue.Add(Agents.BarQueue.First());

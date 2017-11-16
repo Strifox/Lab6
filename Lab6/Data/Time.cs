@@ -1,17 +1,40 @@
 ﻿using System;
+using System.Reflection.Emit;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Label = System.Windows.Controls.Label;
 
 
 namespace Lab6
 {
     public class Time
     {
-        //static MainWindow Form = Application.Current.MainWindow as MainWindow;
-        //private static int increment;
-        //public static int Increment { get { return increment; } set { increment = value; } }
-        //public static void BarTimerStart()
+        public Action<bool> CheckTimer { get; set; }
+        public int? CurrentTime { get; set; }
+        public void RunTimer(int runTime, Label timeLabel)
+        {
+            if (CurrentTime != null && CheckTimer != null)
+            {
+                Task.Factory.StartNew(() =>
+                {
+                    
+                        for (var second = 0; second < runTime; second++)
+                        {
+                            Thread.Sleep(10);
+                            CurrentTime = second;
+                            timeLabel.Content = CurrentTime.ToString();
+                        }
+                    CheckTimer(false);
+                });
+            }
+        }
+
+        //private int increment;
+        //public  int Increment { get { return increment; } set { increment = value; } }
+        //public Label TimeLabel { get; set; }
+        //public  void BarTimerStart()
         //{
 
         //    DispatcherTimer barTimer = new DispatcherTimer()
@@ -22,32 +45,11 @@ namespace Lab6
         //    barTimer.Start();
         //}
 
-        //private static void BarTimerTicker(object sender, EventArgs e)
+        //private void BarTimerTicker(object sender, EventArgs e)
         //{
         //    increment++;
-        //    Form.TimerLabel.Content = increment.ToString();
+        //    TimeLabel.Content = increment.ToString();
+
         //}
-
-        private bool checkTimer = false;
-        private long? Seconds { get; set; }
-        public long? Increment { get; set; }
-
-        public void RunTimer(int timer)
-        {
-            Task.Run(() =>
-            {
-                if (!checkTimer)
-                {
-                    Seconds = timer;
-                    for (int seconds = timer; Seconds < Increment; Seconds++)
-                    {
-                        seconds++;
-                        Increment = seconds;
-                    }
-
-                }
-            });
-        }
-
     }
 }

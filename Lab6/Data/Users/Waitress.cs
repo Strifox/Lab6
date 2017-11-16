@@ -21,10 +21,41 @@ namespace Lab6
 {
     public class Waitress : Agents
     {
+        private int CollectDuration { get; set; }
+        private int WashingDuration { get; set; }
+        private int AddToShelfDuration {get; set; }
 
-        public Waitress() : base()
-        {
+        public void Handling(Items<UsedGlass> usedGlasses, Items<Chair> chairs, Action<string, object> updateListBox)
+        {       // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
+            if (usedGlasses.itemQueue.Count > 0)
+            {
+                updateListBox("Plockar tomma glas", this);
+                Thread.Sleep(CollectDuration);
+                updateListBox("Rengör glasen", this);
+                Thread.Sleep(WashingDuration);
+                updateListBox("Lägger tillbaka glasen i hyllan", this);
+                Thread.Sleep(AddToShelfDuration);
+                foreach (var usedGlass in usedGlasses.itemQueue)
+                {
+                    usedGlasses.itemQueue.Take();
+                    MainWindow.glasses.itemQueue.Add(new Glass());
+                }
+            }
 
+            else
+            {
+                updateListBox("Väntar på disk", this);
+                while (!usedGlasses.itemQueue.Any())
+                    Thread.Sleep(100);
+            }
         }
+
+        public Waitress(int collectDuration, int washingDuration, int addToShelfDuration) : base()
+        {
+             CollectDuration = collectDuration;
+             WashingDuration = washingDuration;
+            AddToShelfDuration = addToShelfDuration;
+        }
+
     }
 }

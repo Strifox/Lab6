@@ -27,7 +27,7 @@ namespace Lab6
         private int increment = 1;
         public static Items<Chair> chairs;
         public static Items<Glass> glasses;
-
+        public static Items<UsedGlass> usedGlasses;
         Time timer = new Time();
         private static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct = cts.Token;
@@ -36,30 +36,32 @@ namespace Lab6
         {
             InitializeComponent();
 
+            // instantiate the generic Item variables
             chairs = new Items<Chair>();
             glasses = new Items<Glass>();
+            usedGlasses = new Items<UsedGlass>();
 
-            chairs.CreateItems(new Chair(), 8);
-            glasses.CreateItems(new Glass(), 9);
-        }
+            usedGlasses.item.maxNumOfUsedGlasses = glasses.item.maxNumOfGlasses;
 
-        private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            // Creating x amounts of items through function call.
+            chairs.CreateItems(new Chair(), chairs.item.maxNumOfChairs);
+            glasses.CreateItems(new Glass(), glasses.item.maxNumOfGlasses);
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            TimerLabel.Content = timer.Increment;
-            timer.RunTimer(120);
+            timer.RunTimer(120, TimerLabel);
             if (BtnOpenCloseBar.Content.ToString() == ("Open"))
                 BtnOpenCloseBar.Content = "Close";
-            else
 
+            else
                 BtnOpenCloseBar.Content = "Open";
 
-            //BtnOpenCloseBar.Background
             Bouncer b = new Bouncer();
             Bartender bartender = new Bartender();
+            Waitress waitress = new Waitress(10000, 12000, 3000);
+
+            // Bouncer/Patron Thread
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
@@ -68,11 +70,21 @@ namespace Lab6
                 }
             });
 
+            // Bartender Thread
             Task.Run(() =>
             {
                 while (!ct.IsCancellationRequested)
                 {
                     bartender.Handling(glasses, AddList);
+                }
+            });
+
+            // Waitress Thread
+            Task.Run(() =>
+            {
+                while (!ct.IsCancellationRequested)
+                {
+                    waitress.Handling(usedGlasses, chairs, AddList);
                 }
             });
 
@@ -115,15 +127,8 @@ namespace Lab6
             }
         }
 
-        private void SetTimerTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //timer.Increment = Convert.ToInt32(SetTimerTextBox.Text);
-            //TimerLabel.Content = timer.Increment;
-        }
-
-        private void btnDecreaseTimer_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

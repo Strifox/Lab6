@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Lab6
 {
-    public class Items<T>
+    public class Items<T> where T : class, new()
     {
+        public T item;
+
         public BlockingCollection<T> itemQueue = new BlockingCollection<T>();
 
         public void CreateItems(T item, int count)
@@ -29,15 +31,24 @@ namespace Lab6
             return n;
         }
 
+        public Items()
+        {
+            item = new T();
+        }
     }
-    public class Chair : Items<Chair>
+    public class Chair
     {
-       // public int numOfChairs = 9;  
+        public int maxNumOfChairs = 9;  
     }
 
-    public class Glass : Items<Glass>
+    public class Glass
     {
-       // public int numOfGlasses = 8;
+        public int maxNumOfGlasses = 8;
+    }
+
+    public class UsedGlass
+    {
+        public int maxNumOfUsedGlasses;
     }
 }
 
