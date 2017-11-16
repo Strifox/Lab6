@@ -23,11 +23,13 @@ namespace Lab6
     {
         //Private fields to change Thread.Sleep in Handling method
         private int CollectDuration { get; set; } //The time it takes to pick up empty glasses
+
         private int WashingDuration { get; set; } //The time it takes to clean the glasses
         private int AddToShelfDuration { get; set; } //The time it takes to add glasses to the shelf
 
         public void Handling(Items<UsedGlass> usedGlasses, Items<Chair> chairs, Action<string, object> updateListBox)
-        {       // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
+        {
+            // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
             if (usedGlasses.itemQueue.Count > 0)
             {
                 updateListBox("Plockar tomma glas", this);
@@ -42,13 +44,8 @@ namespace Lab6
                     MainWindow.glasses.itemQueue.Add(new Glass());
                 }
             }
-            else
-            {
-                updateListBox("Väntar på disk", this);
-                while (!usedGlasses.itemQueue.Any())
-                    Thread.Sleep(100);
-            }
-            if (ChairQueue.Count == chairs.item.maxNumOfChairs  && usedGlasses.itemQueue.Count == 0 && Time.CurrentTime == 0)
+            if (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 &&
+                Time.CurrentTime == 0)
             {
                 updateListBox("Alla glasen är rena och alla gäster har gått, servitrisen går nu hem", this);
                 while (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 &&
@@ -56,6 +53,12 @@ namespace Lab6
                 {
                     Thread.Sleep(100);
                 }
+            }
+            if (usedGlasses.itemQueue.Count == 0)
+            {
+                updateListBox("Väntar på disk", this);
+                while (!usedGlasses.itemQueue.Any())
+                    Thread.Sleep(100);
             }
         }
 
