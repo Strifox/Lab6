@@ -23,6 +23,8 @@ namespace Lab6
     {
         public void Handling(Items<Glass> glasses, Action<String, object> updateListBox)
         {
+            Time t = new Time();
+            
             if (BarQueue.Count == 0)
             {
                 updateListBox($"Väntar på gäst", this);

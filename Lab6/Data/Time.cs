@@ -11,24 +11,22 @@ namespace Lab6
 {
     public class Time
     {
-        public Action<bool> CheckTimer { get; set; }
-        public int? CurrentTime { get; set; }
-        public void RunTimer(int runTime, Label timeLabel)
+        public int CurrentTime { get; set; }
+        public void RunTimer(int runTime)
         {
-            if (CurrentTime != null && CheckTimer != null)
+            CurrentTime = runTime;
+            Task.Run(() =>
             {
-                Task.Factory.StartNew(() =>
+                while (CurrentTime > 0)
                 {
-                    
-                        for (var second = 0; second < runTime; second++)
-                        {
-                            Thread.Sleep(10);
-                            CurrentTime = second;
-                            timeLabel.Content = CurrentTime.ToString();
-                        }
-                    CheckTimer(false);
-                });
-            }
+
+                    Thread.Sleep(1000);
+                    CurrentTime--;
+
+                }
+            });
+
+
         }
 
         //private int increment;

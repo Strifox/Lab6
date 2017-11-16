@@ -21,22 +21,35 @@ namespace Lab6
 {
     public class Bouncer : Agents
     {
+        private Time Timer { get; set; }
         private Random random = new Random();
-        public Bouncer() : base()
+        private Action<string, object> Logtext { get; set; }
+        public Bouncer(Time t) : base()
         {
-            //Callback(namesList[random.Next(namesList.Count)]);
-            //BounceGuests();
+            Timer = t;
+            
         }
 
         public void Run(Action<string, object> logText)
         {
-            Thread.Sleep(random.Next(3, 10) * 1000);
-            Task.Run(() =>
+            while (Timer.CurrentTime > 0)
             {
-                Patron p = new Patron(10000, 20000);
-                p.RunPatron(logText);
-            });
-
+                Thread.Sleep(random.Next(3, 10) * 1000);
+                Task.Run(() =>
+                {
+                    Patron p = new Patron(10000, 20000);
+                    p.RunPatron(logText);
+                });
+            }
+            if (Timer.CurrentTime == 0)
+            {
+                Logtext = logText;
+                Logtext?.Invoke($"INKASTAREN HAR SLUTAT SLÄPPA IN GÄSTER", this);
+                while (Timer.CurrentTime == 0)
+                {
+                    Thread.Sleep(10);
+                }
+            }
         }
     }
 }

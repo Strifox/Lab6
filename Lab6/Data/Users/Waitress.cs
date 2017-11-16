@@ -21,9 +21,10 @@ namespace Lab6
 {
     public class Waitress : Agents
     {
-        private int CollectDuration { get; set; }
-        private int WashingDuration { get; set; }
-        private int AddToShelfDuration {get; set; }
+        //Private fields to change Thread.Sleep in Handling method
+        private int CollectDuration { get; set; } //The time it takes to pick up empty glasses
+        private int WashingDuration { get; set; } //The time it takes to clean the glasses
+        private int AddToShelfDuration { get; set; } //The time it takes to add glasses to the shelf
 
         public void Handling(Items<UsedGlass> usedGlasses, Items<Chair> chairs, Action<string, object> updateListBox)
         {       // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
@@ -52,8 +53,8 @@ namespace Lab6
 
         public Waitress(int collectDuration, int washingDuration, int addToShelfDuration) : base()
         {
-             CollectDuration = collectDuration;
-             WashingDuration = washingDuration;
+            CollectDuration = collectDuration;
+            WashingDuration = washingDuration;
             AddToShelfDuration = addToShelfDuration;
         }
 

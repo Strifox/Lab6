@@ -50,14 +50,14 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            timer.RunTimer(120, TimerLabel);
+            timer.RunTimer(20);
             if (BtnOpenCloseBar.Content.ToString() == ("Open"))
                 BtnOpenCloseBar.Content = "Close";
 
             else
                 BtnOpenCloseBar.Content = "Open";
 
-            Bouncer b = new Bouncer();
+            Bouncer b = new Bouncer(timer);
             Bartender bartender = new Bartender();
             Waitress waitress = new Waitress(10000, 12000, 3000);
 
@@ -94,6 +94,7 @@ namespace Lab6
             });
         }
 
+      
         private void AddList(string action, object sender)
         {
             action = $"{increment++} {action}";
@@ -110,6 +111,9 @@ namespace Lab6
                     case Waitress _:
                         WaiterListBox.Items.Insert(0, action);
                         break;
+                    case Bouncer _:
+                        GuestListBox.Items.Insert(0, action);
+                        break;
                 }
             });
         }
@@ -120,9 +124,10 @@ namespace Lab6
             {
                 Dispatcher.Invoke(() =>
                 {
-                    GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests.ToString()}";
-                    ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems().ToString()}";
-                    GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems().ToString()}";
+                    GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests}";
+                    ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems()}";
+                    GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems()}";
+                    TimerLabel.Content = timer.CurrentTime;
                 });
             }
         }
@@ -130,6 +135,7 @@ namespace Lab6
         private void GuestListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
         }
+
     }
 }
 
