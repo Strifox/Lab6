@@ -23,14 +23,9 @@ namespace Lab6
     {
         public static BlockingCollection<Patron> BarQueue = new BlockingCollection<Patron>();
         public static BlockingCollection<Patron> ChairQueue = new BlockingCollection<Patron>();
-
         public static int SpeedModifier;
 
-
-        public static void Waiting(int milliseconds)
-        {
-            Thread.Sleep(Convert.ToInt32(milliseconds/SpeedModifier));
-        }
+        public static void Waiting(int milliseconds) { Thread.Sleep(Convert.ToInt32(milliseconds / SpeedModifier)); }
 
     }
 

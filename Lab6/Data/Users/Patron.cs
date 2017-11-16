@@ -63,6 +63,7 @@ namespace Lab6
             "Jennie"
         };
 
+        // This method makes the behaviour of patron
         public void RunPatron(Action<string, object> logText)
         {
             LogText = logText;

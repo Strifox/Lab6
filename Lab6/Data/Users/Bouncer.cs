@@ -21,12 +21,11 @@ namespace Lab6
 {
     public class Bouncer : Agents
     {
-        //Instantiates
+        //Instances
         private Random random = new Random();
 
         //Delegates
         private Action<string, object> Logtext { get; set; }
-
 
         public Bouncer() : base()
         {
@@ -35,15 +34,17 @@ namespace Lab6
         //Method to create Patrons and also to stop creating Patrons.
         public void Run(Action<string, object> logText)
         {
+            //if timer is above 0, the bouncer creates patrons.
             if (Time.CurrentTime > 0)
             {
-                Waiting(random.Next(3000, 10000)); //Creates patron every 3-10 second
+                Waiting(random.Next(3000, 10000));
                 Task.Run(() =>
                 {
                     Patron p = new Patron(10000, 20000); 
                     p.RunPatron(logText);
                 });
             }
+            //If timer is 0, the bouncer stops creating patrons.
             if (Time.CurrentTime == 0)
             {
                 Logtext = logText;

@@ -23,37 +23,35 @@ namespace Lab6
     {
         //Private fields to change Thread.Sleep in Handling method
         private int CollectDuration { get; set; } //The time it takes to pick up empty glasses
-
         private int WashingDuration { get; set; } //The time it takes to clean the glasses
         private int AddToShelfDuration { get; set; } //The time it takes to add glasses to the shelf
 
 
         public void Handling(Items<UsedGlass> usedGlasses, Items<Glass> glasses, Items<Chair> chairs, Action<string, object> updateListBox)
         {
-            // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
+            // Updates label on GUI with following text
             if (usedGlasses.itemQueue.Count > 0)
             {
                 updateListBox("Plockar tomma glas", this);
-                Waiting(CollectDuration);
+                Waiting(CollectDuration); //Sleep duration
                 updateListBox("Rengör glasen", this);
-                Waiting(WashingDuration);
+                Waiting(WashingDuration); //Sleep duration
                 updateListBox("Lägger tillbaka glasen i hyllan", this);
-                Waiting(AddToShelfDuration);
+                Waiting(AddToShelfDuration); //Sleep duration
+
                 foreach (var usedGlass in usedGlasses.itemQueue)
                 {
-                    usedGlasses.itemQueue.Take();
-                    glasses.itemQueue.Add(new Glass());
+                    usedGlasses.itemQueue.Take(); // Removes one used glass from the used glasses queue
+                    glasses.itemQueue.Add(new Glass()); // Adds a new glass item to the glass queue
                 }
             }
             if (usedGlasses.itemQueue.Count == 0)
             {
                 if (Patron.NumOfGuests == 0 && Time.CurrentTime == 0)
                 {
-                    updateListBox("Allt klart, stänger nu puben", this);
-                    while (Patron.NumOfGuests == 0 && Time.CurrentTime == 0)
-                    {
+                    updateListBox("Allt klart, stänger nu puben", this); // If bar is empty and used glass queue is empty, this is written
+                    while (Patron.NumOfGuests == 0 && Time.CurrentTime == 0) //Sleep loop to only write above statement once
                         Thread.Sleep(100);
-                    }
                 }
                 else
                 {
@@ -66,9 +64,9 @@ namespace Lab6
 
         public Waitress(int collectDuration, int washingDuration, int addToShelfDuration) : base()
         {
-            CollectDuration = collectDuration;
-            WashingDuration = washingDuration;
-            AddToShelfDuration = addToShelfDuration;
+            CollectDuration = collectDuration; // sets duration of collection sleep timer
+            WashingDuration = washingDuration; // sets duration of washing sleep timer
+            AddToShelfDuration = addToShelfDuration; // sets duration of Adding to shelf sleep timer
         }
 
     }
