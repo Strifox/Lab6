@@ -53,7 +53,7 @@ namespace Lab6
             BtnStop.IsEnabled = true;
             
             //Bar timer. 
-            Time.RunTimer(20);
+            Time.RunTimer(5);
 
             // Instantiate all the agents. Patrons is later created in the bouncer instance method
             Bouncer bouncer = new Bouncer();
@@ -114,7 +114,7 @@ namespace Lab6
             {
                 Dispatcher.Invoke(() =>
                 {
-                    GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests}";
+                    GuestLabel1.Content = $"Number of guests: {Patron.NumOfGuests}";
                     ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems()}";
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems()}";
                     TimerLabel.Content = Time.CurrentTime;

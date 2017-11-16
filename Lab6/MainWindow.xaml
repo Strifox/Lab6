@@ -6,7 +6,17 @@
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
         Title="MainWindow" Height="533.237" Width="944.966">
-    <Grid Margin="0,0,-8,-4" Background="#FF25374B">
+    <Grid Margin="0,0,-8,-4">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="#FFD32121" Offset="1"/>
+                <GradientStop Color="Black" Offset="0.182"/>
+                <GradientStop Color="#FF981717" Offset="1"/>
+                <GradientStop Color="#FFC01E1E" Offset="0.958"/>
+                <GradientStop Color="#FFC01E1E" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15*"/>
             <ColumnDefinition Width="170*"/>
@@ -15,19 +25,21 @@
         <ListBox x:Name="BartenderListBox" HorizontalAlignment="Left" Height="207" Margin="11,60,0,0" VerticalAlignment="Top" Width="170" Grid.ColumnSpan="2"/>
         <ListBox x:Name="WaiterListBox" HorizontalAlignment="Left" Height="207" Margin="6.982,60,0,0" VerticalAlignment="Top" Width="170" Grid.Column="2"/>
         <ListBox x:Name="GuestListBox" HorizontalAlignment="Left" Height="207" Margin="187.982,61,0,0" VerticalAlignment="Top" Width="245" Grid.Column="2"/>
-        <Label x:Name="BartenderLabel" Content="Bartender" HorizontalAlignment="Left" Margin="39.164,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="26" FontFamily="Segoe UI Black" Grid.Column="1"/>
-        <Label x:Name="WaiterLabel" Content="Waitress" HorizontalAlignment="Left" Margin="28.982,29,0,0" VerticalAlignment="Top" Width="104" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="26" Grid.Column="2" FontFamily="Segoe UI Black"/>
-        <Label x:Name="GuestLabel" Content="Guests" HorizontalAlignment="Left" Margin="267.982,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="26" Grid.Column="2" FontFamily="Segoe UI Black" Background="Transparent"/>
+        <Label x:Name="BartenderLabel" Content="Bartender" HorizontalAlignment="Left" Margin="39.164,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="26" FontFamily="Segoe UI Black" Grid.Column="1" Foreground="White"/>
+        <Label x:Name="WaiterLabel" Content="Waitress" HorizontalAlignment="Left" Margin="36.982,29,0,0" VerticalAlignment="Top" Width="104" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="26" Grid.Column="2" FontFamily="Segoe UI Black" Foreground="White"/>
+        <Label x:Name="GuestLabel" Content="Guests" HorizontalAlignment="Left" Margin="267.982,29,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.41,0.308" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="26" Grid.Column="2" FontFamily="Segoe UI Black" Background="Transparent" Foreground="White"/>
         <Button x:Name="BtnPauseBartender" Content="Pause" HorizontalAlignment="Left" Margin="11,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False" Grid.ColumnSpan="2"/>
         <Button x:Name="BtnPauseWaiter" Content="Pause" HorizontalAlignment="Left" Margin="6.982,272,0,0" VerticalAlignment="Top" Width="170" Height="38" IsEnabled="False" Grid.Column="2"/>
         <Button x:Name="BtnPauseGuests" Content="Pause" HorizontalAlignment="Left" Margin="186.982,272,0,0" VerticalAlignment="Top" Width="245" Height="38" IsEnabled="False" Grid.Column="2"/>
-        <Button x:Name="BtnOpenCloseBar" Content="Open" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="274" Height="70" Click="BtnOpenCloseBar_Click" Grid.ColumnSpan="3" Background="#FF29DC24" BorderBrush="#FF1EE030" Foreground="Black"/>
-        <Button x:Name="BtnStop" Content="STOP" HorizontalAlignment="Left" Margin="181.982,366,0,0" VerticalAlignment="Top" Width="170" Height="70" Grid.Column="2" BorderBrush="White" Foreground="White" Background="#FFCD3E3E" IsEnabled="False" Click="BtnStop_Click"/>
-        <Label x:Name="TimerLabel" HorizontalAlignment="Left" Margin="586.982,29,0,0" VerticalAlignment="Top" Width="118" Height="41" Content="" Grid.Column="2"/>
-        <Label x:Name="ChairLabel" Content="" HorizontalAlignment="Left" Margin="441.982,96,0,0" VerticalAlignment="Top" Height="58" Width="146" Grid.Column="2"/>
-        <Label x:Name="GlassLabel" Content="" HorizontalAlignment="Left" Margin="441.982,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.029" Height="57" Width="146" Grid.Column="2"/>
-        <Label x:Name="GuestLabel1" Content="" HorizontalAlignment="Left" Margin="441.982,221,0,0" VerticalAlignment="Top" Height="66" Width="146" Grid.Column="2"/>
+        <Button x:Name="BtnOpenCloseBar" Content="Open" HorizontalAlignment="Left" Margin="10,366,0,0" VerticalAlignment="Top" Width="274" Height="70" Click="BtnOpenCloseBar_Click" Grid.ColumnSpan="3" Background="#FF29DC24" BorderBrush="#FF1EE030" Foreground="Black" FontWeight="Bold" FontSize="20"/>
+        <Button x:Name="BtnStop" Content="STOP" HorizontalAlignment="Left" Margin="178.982,366,0,0" VerticalAlignment="Top" Width="173" Height="70" Grid.Column="2" BorderBrush="White" Foreground="White" Background="#FFCD3E3E" IsEnabled="False"/>
+        <Label x:Name="TimerLabel" HorizontalAlignment="Left" Margin="586.982,41,0,0" VerticalAlignment="Top" Width="118" Height="41" Content="" Grid.Column="2" Foreground="White" HorizontalContentAlignment="Center"/>
+        <Label x:Name="ChairLabel" Content="" HorizontalAlignment="Left" Margin="441.982,96,0,0" VerticalAlignment="Top" Height="58" Width="146" Grid.Column="2" Foreground="White" FontWeight="Bold" FontStyle="Italic"/>
+        <Label x:Name="GlassLabel" Content="" HorizontalAlignment="Left" Margin="441.982,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.029" Height="57" Width="146" Grid.Column="2" Foreground="White" FontWeight="Bold" FontStyle="Italic"/>
+        <Label x:Name="GuestLabel1" Content="" HorizontalAlignment="Left" Margin="441.982,221,0,0" VerticalAlignment="Top" Height="66" Width="146" Grid.Column="2" FontWeight="Bold" FontStyle="Italic" Foreground="White"/>
         <Slider x:Name="SimulationSpeed" Grid.Column="2" HorizontalAlignment="Left" Margin="450.5,415,0,0" VerticalAlignment="Top" Height="25" Width="244" RenderTransformOrigin="0.788,0.73" ValueChanged="SimulationSpeed_ValueChanged" Minimum="1" Maximum="5" SmallChange="6" IsSnapToTickEnabled="True"/>
+        <Label x:Name="pubclosingLabel" Content="Pub closing in:" Grid.Column="2" HorizontalAlignment="Left" Margin="586.982,10,0,0" VerticalAlignment="Top" Width="118" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+        <Label x:Name="SimulationSpeedLabel" Content="Change Simulation Speed" Grid.Column="2" HorizontalAlignment="Left" Margin="477.982,377,0,0" VerticalAlignment="Top" Width="186" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>

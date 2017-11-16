@@ -14,8 +14,8 @@ namespace Lab6
         public BlockingCollection<T> itemQueue = new BlockingCollection<T>();
 
         public void CreateItems(T item, int count)
-        {            
-            for(int i = 0; i < count; i++)
+        {
+            for (int i = 0; i < count; i++)
             {
                 itemQueue.Add(item);
             }
@@ -31,24 +31,12 @@ namespace Lab6
             return n;
         }
 
-        public Items()
-        {
-            item = new T();
-        }
+        public Items() { item = new T(); }
     }
-    public class Chair
-    {
-        public int maxNumOfChairs = 9;  
-    }
+    public class Chair { public int maxNumOfChairs = 9; }
 
-    public class Glass
-    {
-        public int maxNumOfGlasses = 8;
-    }
+    public class Glass { public int maxNumOfGlasses = 8; }
 
-    public class UsedGlass
-    {
-        public int maxNumOfUsedGlasses;
-    }
+    public class UsedGlass { public int maxNumOfUsedGlasses; }
 }
 

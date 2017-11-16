@@ -23,7 +23,6 @@ namespace Lab6
     {
         public static BlockingCollection<Patron> BarQueue = new BlockingCollection<Patron>();
         public static BlockingCollection<Patron> ChairQueue = new BlockingCollection<Patron>();
-
         public static int SpeedModifier;
 
 

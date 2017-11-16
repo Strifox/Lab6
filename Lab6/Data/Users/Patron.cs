@@ -26,12 +26,18 @@ namespace Lab6
 
         // Fields
         private static int stayDuration;
+
         private static readonly Random Random = new Random();
-        public static int numOfGuests;
-         
+        public static int NumOfGuests;
+
         // Properties
         public string Name { get; set; }
-        public static int StayDuration { get { return stayDuration;} set { stayDuration = value;} }
+
+        public static int StayDuration
+        {
+            get { return stayDuration; }
+            set { stayDuration = value; }
+        }
 
         private readonly List<string> NamesList = new List<string>()
         {
@@ -57,6 +63,7 @@ namespace Lab6
             "Jennie"
         };
 
+        // This method makes the behaviour of patron
         public void RunPatron(Action<string, object> logText)
         {
             LogText = logText;
@@ -69,19 +76,22 @@ namespace Lab6
             DrinksBeer();
             PatronLeaves();
         }
+
         private void PatronEnters()
         {
-            numOfGuests++;
+            NumOfGuests++;
             LogText?.Invoke($"{Name} enters the bar and walks up to the barqueue", this);
             Waiting(1000);
             Agents.BarQueue.TryAdd(this);
         }
+
         public void PatronLookingForChair()
         {
             Waiting(3000);
             LogText?.Invoke($"{Name} letar efter stol!", this);
             Waiting(4000);
         }
+
         private void DrinksBeer()
         {
             LogText($"{Name} sitter ner och dricker öl!", this);
@@ -90,13 +100,14 @@ namespace Lab6
             MainWindow.usedGlasses.itemQueue.Add(new UsedGlass());
 
         }
+
         private void PatronLeaves()
         {
             LogText($"{Name} leaves the bar!", this);
             MainWindow.chairs.itemQueue.Add(new Chair());
-            numOfGuests--;
+            NumOfGuests--;
         }
-        
+
         public Patron(int minTime, int maxTime)
         {
             Name = NamesList[Random.Next(NamesList.Count)];
@@ -105,6 +116,3 @@ namespace Lab6
     }
 
 }
-
-
-
