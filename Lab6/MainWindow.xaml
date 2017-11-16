@@ -37,9 +37,9 @@
         <Label x:Name="ChairLabel" Content="" HorizontalAlignment="Left" Margin="441.982,96,0,0" VerticalAlignment="Top" Height="58" Width="146" Grid.Column="2" Foreground="White" FontWeight="Bold" FontStyle="Italic"/>
         <Label x:Name="GlassLabel" Content="" HorizontalAlignment="Left" Margin="441.982,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.029" Height="57" Width="146" Grid.Column="2" Foreground="White" FontWeight="Bold" FontStyle="Italic"/>
         <Label x:Name="GuestLabel1" Content="" HorizontalAlignment="Left" Margin="441.982,221,0,0" VerticalAlignment="Top" Height="66" Width="146" Grid.Column="2" FontWeight="Bold" FontStyle="Italic" Foreground="White"/>
-        <Slider x:Name="SimulationSpeed" Grid.Column="2" HorizontalAlignment="Left" Margin="450.5,415,0,0" VerticalAlignment="Top" Height="25" Width="244" RenderTransformOrigin="0.788,0.73" ValueChanged="SimulationSpeed_ValueChanged" Minimum="1" Maximum="5" SmallChange="6" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="SimulationSpeed" Grid.Column="2" HorizontalAlignment="Left" Margin="450.982,406,0,0" VerticalAlignment="Top" Height="25" Width="244" RenderTransformOrigin="0.788,0.73" ValueChanged="SimulationSpeed_ValueChanged" Minimum="1" Maximum="5" SmallChange="6" IsSnapToTickEnabled="True"/>
         <Label x:Name="pubclosingLabel" Content="Pub closing in:" Grid.Column="2" HorizontalAlignment="Left" Margin="586.982,10,0,0" VerticalAlignment="Top" Width="118" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"/>
-        <Label x:Name="SimulationSpeedLabel" Content="Change Simulation Speed" Grid.Column="2" HorizontalAlignment="Left" Margin="477.982,377,0,0" VerticalAlignment="Top" Width="186" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+        <Label x:Name="SimulationSpeedLabel" Content="Change Simulation Speed" Grid.Column="2" HorizontalAlignment="Left" Margin="477.982,368,0,0" VerticalAlignment="Top" Width="186" Foreground="White" FontWeight="Bold" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>
