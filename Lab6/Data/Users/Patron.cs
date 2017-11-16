@@ -25,14 +25,14 @@ namespace Lab6
         private Action<string, object> LogText { get; set; }
 
         // Fields
-        private int stayDuration;
-        private static readonly Random _random = new Random();
+        private readonly int StayDuration;
+        private static readonly Random Random = new Random();
         public static int numOfGuests;
          
         // Properties
         public string Name { get; set; }
 
-        private readonly List<string> _namesList = new List<string>()
+        private readonly List<string> NamesList = new List<string>()
         {
             "Andreas",
             "Erik",
@@ -85,7 +85,7 @@ namespace Lab6
         {
             LogText($"{Name} sitter ner och dricker öl!", this);
             MainWindow.chairs.itemQueue.Take();
-            Thread.Sleep(stayDuration);
+            Thread.Sleep(StayDuration);
             MainWindow.usedGlasses.itemQueue.Add(new UsedGlass());
 
         }
@@ -98,8 +98,8 @@ namespace Lab6
         
         public Patron(int minTime, int maxTime)
         {
-            Name = _namesList[_random.Next(_namesList.Count)];
-            stayDuration = _random.Next(minTime, maxTime);
+            Name = NamesList[Random.Next(NamesList.Count)];
+            StayDuration = Random.Next(minTime, maxTime);
         }
     }
 
