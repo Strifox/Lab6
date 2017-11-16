@@ -21,11 +21,18 @@ namespace Lab6
 {
     public class Bartender : Agents
     {
+
         public void Handling(Items<Glass> glasses, Action<String, object> updateListBox)
         {
             //If statement to check if barqueue is empty
             if (BarQueue.Count == 0)
             {
+                if (Time.CurrentTime <= 0)
+                {
+                    updateListBox($"Baren är nu stängd och bartender går hem", this);
+                    while (BarQueue.Count == 0 && Time.CurrentTime == 0)
+                        Thread.Sleep(10);
+                }
                 updateListBox($"Väntar på gäst", this); // updates bartenderlistbox with this statement if queue is empty.
                 while (BarQueue.Count == 0)
                     Thread.Sleep(100);
@@ -52,6 +59,7 @@ namespace Lab6
                     Thread.Sleep(3000);
                 }
             }
+            
         }
 
         public Bartender() : base()

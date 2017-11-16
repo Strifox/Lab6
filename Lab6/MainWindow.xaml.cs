@@ -30,7 +30,6 @@ namespace Lab6
         public static Items<UsedGlass> usedGlasses;
         private static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct = cts.Token;
-        Time timer = new Time();
 
         public MainWindow()
         {
@@ -50,14 +49,16 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-            timer.RunTimer(300);
+            //Bar timer. 
+            Time.RunTimer(20);
+
             if (BtnOpenCloseBar.Content.ToString() == ("Open"))
                 BtnOpenCloseBar.Content = "Close";
 
             else
                 BtnOpenCloseBar.Content = "Open";
 
-            Bouncer b = new Bouncer(timer);
+            Bouncer b = new Bouncer();
             Bartender bartender = new Bartender();
             Waitress waitress = new Waitress(10000, 12000, 3000);
 
@@ -127,7 +128,7 @@ namespace Lab6
                     GuestLabel1.Content = $"Number of guests: {Patron.numOfGuests}";
                     ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems()}";
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems()}";
-                    TimerLabel.Content = timer.CurrentTime;
+                    TimerLabel.Content = Time.CurrentTime;
                 });
             }
         }
