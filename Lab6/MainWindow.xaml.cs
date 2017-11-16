@@ -28,6 +28,7 @@ namespace Lab6
         public static Items<Chair> chairs;
         public static Items<Glass> glasses;
 
+        Time timer = new Time();
         private static CancellationTokenSource cts = new CancellationTokenSource();
         public CancellationToken ct = cts.Token;
 
@@ -48,9 +49,9 @@ namespace Lab6
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
-                Time.BarTimerStart();
+            TimerLabel.Content = timer.Increment;
+            timer.RunTimer(120);
             if (BtnOpenCloseBar.Content.ToString() == ("Open"))
-
                 BtnOpenCloseBar.Content = "Close";
             else
 
@@ -112,6 +113,17 @@ namespace Lab6
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems().ToString()}";
                 });
             }
+        }
+
+        private void SetTimerTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //timer.Increment = Convert.ToInt32(SetTimerTextBox.Text);
+            //TimerLabel.Content = timer.Increment;
+        }
+
+        private void btnDecreaseTimer_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

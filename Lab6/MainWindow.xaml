@@ -33,6 +33,10 @@
         <Label x:Name="ChairLabel" Content="" HorizontalAlignment="Left" Margin="563.5,96,0,0" VerticalAlignment="Top" Height="58" Width="146" Grid.Column="2"/>
         <Label x:Name="GlassLabel" Content="" HorizontalAlignment="Left" Margin="563.5,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.158,-1.029" Height="57" Width="146" Grid.Column="2"/>
         <Label x:Name="GuestLabel1" Content="" HorizontalAlignment="Left" Margin="563.5,221,0,0" VerticalAlignment="Top" Height="66" Width="146" Grid.Column="2"/>
+        <Label x:Name="LabelSetTimer" Content="Set Timer" Grid.Column="2" HorizontalAlignment="Left" Margin="563.964,348,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="SetTimerTextBox" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="572.964,373,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" TextChanged="SetTimerTextBox_TextChanged"/>
+        <Button x:Name="btnDecreaseTimer" Content="&lt;&lt;" Grid.Column="2" HorizontalAlignment="Left" Margin="541.964,373,0,0" VerticalAlignment="Top" Width="26" Height="23" RenderTransformOrigin="-0.215,0.369" Click="btnDecreaseTimer_Click"/>
+        <Button x:Name="btnIncreaseTimer" Content="&gt;&gt;" Grid.Column="2" HorizontalAlignment="Left" Margin="621.964,373,0,0" VerticalAlignment="Top" Width="26" Height="23" RenderTransformOrigin="-0.215,0.369"/>
 
     </Grid>
 </Window>
