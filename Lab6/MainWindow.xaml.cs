@@ -116,7 +116,7 @@ namespace Lab6
                 });
                 Thread.Sleep(10);
             }
-        }
+        
 
             Dispatcher.Invoke(() =>
             {
@@ -126,6 +126,7 @@ namespace Lab6
                 TimerLabel.Content = "";
             });
         }
+
         private void SimulationSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Agents.SpeedModifier = Convert.ToInt32(SimulationSpeed.Value);
