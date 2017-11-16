@@ -52,11 +52,11 @@ namespace Lab6
                 if (glasses.GetNumOfItems() > 0)
                 {
                     updateListBox($"Plockar glas från hyllan", this); // updates bartenderlistbox with this statement if it is not empty
-                    Thread.Sleep(3000);
+                    Waiting(3000);
                     glasses.itemQueue.Take();
                     Agents.ChairQueue.Add(Agents.BarQueue.First());
                     updateListBox($"Häller upp öl till {BarQueue.Take().Name}", this); // updates with this statement if glass collection is not empty. Also removes guest from Barqueue.
-                    Thread.Sleep(3000);
+                    Waiting(4000);
                 }
             }
             
