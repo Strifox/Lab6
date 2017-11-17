@@ -16,6 +16,7 @@ namespace Lab6.Data
         public static int WashingDuration = 12000;
         public static int AddToShelfDuration = 3000;
         //Simulation
-        public static int SimulationSpeed = 300;
+        public static int SimulationSpeed = 1000; 
+        public static int SimulationTime = 300; // The timer for the pubs opening time.
     }
 }

@@ -53,8 +53,8 @@ namespace Lab6
         {
             BtnStop.IsEnabled = true;
             BtnOpenCloseBar.IsEnabled = false;
-            //Bar timer. 
-            Time.RunTimer(SimulationSettings.SimulationSpeed);
+            //Bar timer
+            Time.RunTimer(SimulationSettings.SimulationTime, SimulationSettings.SimulationSpeed);
 
             // Instantiate all the agents. Patrons is later created in the bouncer instance method
             Bouncer bouncer = new Bouncer();
@@ -62,13 +62,9 @@ namespace Lab6
             Waitress waitress = new Waitress(SimulationSettings.CollectionDuration, SimulationSettings.WashingDuration, SimulationSettings.AddToShelfDuration);
 
             // Bouncer/Patron Thread
-            Task.Run(() =>
-            {
-                bouncer.Run(AddList, ct);
-            });
-
+            Task.Run(() => { bouncer.Run(AddList, ct); });
             // Bartender Thread
-            Task.Run(() => { { bartender.Handling(glasses, AddList, ct); } });
+            Task.Run(() => { bartender.Handling(glasses, AddList, ct); });
             // Waitress Thread
             Task.Run(() => { waitress.Handling(usedGlasses, glasses, chairs, AddList, ct); });
             // Label Thread
