@@ -7,15 +7,15 @@ using System.Windows.Navigation;
 
 namespace Lab6.Data
 {
-    public static class Pub
+    public static class SimulationSettings
     {
         //All numbers are in seconds
 
         //Waitress
-        public static int CollectionDuration = 10;
-        public static int WashingDuration = 12;
-        public static int AddToShelfDuration = 3;
+        public static int CollectionDuration = 10000;
+        public static int WashingDuration = 12000;
+        public static int AddToShelfDuration = 3000;
         //Simulation
-        public static int SimulationSpeed = 120;
+        public static int SimulationSpeed = 300;
     }
 }

@@ -44,28 +44,26 @@ namespace Lab6
                         glasses.itemQueue.Add(new Glass());
                     }
                 }
-
+                if (Time.CurrentTime == 0 && Patron.NumOfGuests == 0 && usedGlasses.itemQueue.Count == 0)
+                {
+                    updateListBox("Allt är rent, Puben stängs och servitrisen går hem", this);
+                    while (Time.CurrentTime == 0 && Patron.NumOfGuests == 0)
+                        Thread.Sleep(100);
+                }
                 if (usedGlasses.itemQueue.Count == 0)
                 {
                     updateListBox("Väntar på disk", this);
                     while (!usedGlasses.itemQueue.Any())
                         Thread.Sleep(100);
-
-                    if (Time.CurrentTime == 0 && Patron.NumOfGuests == 0)
-                    {
-                        updateListBox("Allt är rent, Puben stängs och servitrisen går hem", this);
-                        while (Time.CurrentTime == 0 && Patron.NumOfGuests == 0)
-                            Thread.Sleep(100);
-                    }
                 }
             }
         }
 
         public Waitress(int collectDuration, int washingDuration, int addToShelfDuration) : base()
         {
-            CollectDuration = collectDuration * 1000;
-            WashingDuration = washingDuration * 1000;
-            AddToShelfDuration = addToShelfDuration * 1000;
+            CollectDuration = collectDuration;
+            WashingDuration = washingDuration;
+            AddToShelfDuration = addToShelfDuration;
         }
 
     }

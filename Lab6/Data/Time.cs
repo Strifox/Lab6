@@ -16,6 +16,7 @@ namespace Lab6
 
         public static void RunTimer(int runTime)
         {
+            
             CurrentTime = runTime;
 
             //Creating the timer in it's own task. 
