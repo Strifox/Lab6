@@ -46,20 +46,17 @@ namespace Lab6
                     }
                 }
 
-                else
+                if (usedGlasses.itemQueue.Count == 0)
                 {
-                    updateListBox("Väntar på disk", this);
-                    while (!usedGlasses.itemQueue.Any())
-                        Thread.Sleep(100);
-                }
-
-                if (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 && Time.CurrentTime == 0)
-                {
+                    if (Time.CurrentTime == 0 && Patron.NumOfGuests == 0)
                     updateListBox("Alla glasen är rena och alla gäster har gått, servitrisen går nu hem", this);
                     while (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 && Time.CurrentTime == 0)
                     {
                         Thread.Sleep(100);
                     }
+                    updateListBox("Väntar på disk", this);
+                    while (!usedGlasses.itemQueue.Any())
+                        Thread.Sleep(100);
                 }
             }
         }
