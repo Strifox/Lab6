@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
 using System.Windows.Threading;
+using Lab6.Data;
 
 namespace Lab6
 {
@@ -40,22 +41,25 @@ namespace Lab6
             glasses = new Items<Glass>();
             usedGlasses = new Items<UsedGlass>();
 
-            usedGlasses.item.maxNumOfUsedGlasses = glasses.item.maxNumOfGlasses;
+
+            UsedGlass.maxNumOfUsedGlasses = Glass.maxNumOfGlasses;
 
             // Creating x amounts of items through function call.
-            chairs.CreateItems(new Chair(), chairs.item.maxNumOfChairs);
-            glasses.CreateItems(new Glass(), glasses.item.maxNumOfGlasses);
+            chairs.CreateItems(new Chair(), Chair.maxNumOfChairs);
+            glasses.CreateItems(new Glass(), Glass.maxNumOfGlasses);
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
         {
+            BtnStop.IsEnabled = true;
+            BtnOpenCloseBar.IsEnabled = false;
             //Bar timer. 
-            Time.RunTimer(120);
+            Time.RunTimer(Pub.SimulationSpeed);
 
             // Instantiate all the agents. Patrons is later created in the bouncer instance method
             Bouncer bouncer = new Bouncer();
             Bartender bartender = new Bartender();
-            Waitress waitress = new Waitress(10000, 12000, 3000);
+            Waitress waitress = new Waitress(Pub.CollectionDuration, Pub.WashingDuration, Pub.AddToShelfDuration);
 
             // Bouncer/Patron Thread
             Task.Run(() =>
@@ -66,19 +70,11 @@ namespace Lab6
             // Bartender Thread
             Task.Run(() => { { bartender.Handling(glasses, AddList, ct); } });
             // Waitress Thread
-            Task.Run(() =>
-            {   
-                waitress.Handling(usedGlasses, glasses, chairs, AddList, ct);
-            });
-
+            Task.Run(() => { waitress.Handling(usedGlasses, glasses, chairs, AddList, ct); });
             // Label Thread
-            Task.Run(() =>
-            {
-                UpdateLabels();
-            });
+            Task.Run(() => { UpdateLabels(); });
         }
 
-      
         private void AddList(string action, object sender)
         {
             action = $"{increment++} {action}";
@@ -112,11 +108,11 @@ namespace Lab6
                     GuestLabel1.Content = $"Number of guests: {Patron.NumOfGuests}";
                     ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems()}";
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems()}";
+                    pubclosingLabel.Content = $"Pub closing in:";
                     TimerLabel.Content = Time.CurrentTime;
                 });
                 Thread.Sleep(10);
             }
-        
 
             Dispatcher.Invoke(() =>
             {
@@ -124,6 +120,7 @@ namespace Lab6
                 ChairLabel.Content = "";
                 GlassLabel.Content = "";
                 TimerLabel.Content = "";
+                pubclosingLabel.Content = "";
             });
         }
 
@@ -132,7 +129,7 @@ namespace Lab6
             Agents.SpeedModifier = Convert.ToInt32(SimulationSpeed.Value);
         }
 
-        private void BtnStop_Click(object sender, RoutedEventArgs e)
+        private void BtnStop_Click_1(object sender, RoutedEventArgs e)
         {
             BtnOpenCloseBar.IsEnabled = true;
             BtnStop.IsEnabled = false;

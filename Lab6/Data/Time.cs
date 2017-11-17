@@ -23,7 +23,7 @@ namespace Lab6
             {
                 while (CurrentTime > 0)
                 {
-                    Thread.Sleep(1000); // sleep method to make the property CurrentTime tick once a second.
+                    Agents.Waiting(runTime * 10); // Simulation modifier used to change timer speed.
                     CurrentTime--;
 
                 }

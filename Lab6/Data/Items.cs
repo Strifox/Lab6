@@ -33,10 +33,10 @@ namespace Lab6
 
         public Items() { item = new T(); }
     }
-    public class Chair { public int maxNumOfChairs = 9; }
+    public class Chair { public static int maxNumOfChairs = 9; }
 
-    public class Glass { public int maxNumOfGlasses = 8; }
+    public class Glass { public static int maxNumOfGlasses = 8; }
 
-    public class UsedGlass { public int maxNumOfUsedGlasses; }
+    public class UsedGlass { public static int maxNumOfUsedGlasses; }
 }
 
