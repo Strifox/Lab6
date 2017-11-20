@@ -127,7 +127,6 @@ namespace Lab6
 
         private void BtnStop_Click_1(object sender, RoutedEventArgs e)
         {
-            BtnOpenCloseBar.IsEnabled = true;
             BtnStop.IsEnabled = false;
             GuestListBox.Items.Clear();
             BartenderListBox.Items.Clear();
