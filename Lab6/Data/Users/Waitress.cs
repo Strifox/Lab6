@@ -44,10 +44,10 @@ namespace Lab6
                         glasses.itemQueue.Add(new Glass());
                     }
                 }
-                if (Time.CurrentTime == 0 && Patron.NumOfGuests == 0 && usedGlasses.itemQueue.Count == 0)
+                if (Time.CurrentTime == 0 && Patron.CurrentNumOfGuests == 0 && usedGlasses.itemQueue.Count == 0)
                 {
                     updateListBox("Allt är rent, Puben stängs och servitrisen går hem", this);
-                    while (Time.CurrentTime == 0 && Patron.NumOfGuests == 0)
+                    while (Time.CurrentTime == 0 && Patron.CurrentNumOfGuests == 0)
                         Thread.Sleep(100);
                 }
                 if (usedGlasses.itemQueue.Count == 0)

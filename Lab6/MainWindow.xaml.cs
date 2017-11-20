@@ -42,11 +42,11 @@ namespace Lab6
             usedGlasses = new Items<UsedGlass>();
 
 
-            UsedGlass.maxNumOfUsedGlasses = Glass.maxNumOfGlasses;
+            SimulationSettings.MySimulation().MaxnNumOfUsedGlasses = SimulationSettings.MySimulation().MaxNumOfGlasses;
 
             // Creating x amounts of items through function call.
-            chairs.CreateItems(new Chair(), Chair.maxNumOfChairs);
-            glasses.CreateItems(new Glass(), Glass.maxNumOfGlasses);
+            chairs.CreateItems(new Chair(), SimulationSettings.MySimulation().MaxNumOfChairs);
+            glasses.CreateItems(new Glass(), SimulationSettings.MySimulation().MaxnNumOfUsedGlasses);
         }
 
         private void BtnOpenCloseBar_Click(object sender, RoutedEventArgs e)
@@ -54,12 +54,12 @@ namespace Lab6
             BtnStop.IsEnabled = true;
             BtnOpenCloseBar.IsEnabled = false;
             //Bar timer
-            Time.RunTimer(SimulationSettings.SimulationTime, SimulationSettings.SimulationSpeed);
+            Time.RunTimer(SimulationSettings.MySimulation().SimulationTime, SimulationSettings.MySimulation().SimulationSpeed);
 
             // Instantiate all the agents. Patrons is later created in the bouncer instance method
             Bouncer bouncer = new Bouncer();
             Bartender bartender = new Bartender();
-            Waitress waitress = new Waitress(SimulationSettings.CollectionDuration, SimulationSettings.WashingDuration, SimulationSettings.AddToShelfDuration);
+            Waitress waitress = new Waitress(SimulationSettings.MySimulation().CollectionDurationWaitress, SimulationSettings.MySimulation().WashingDurationWaitress, SimulationSettings.MySimulation().AddToShelfDurationWaitress);
 
             // Bouncer/Patron Thread
             Task.Run(() => { bouncer.Run(AddList, ct); });
@@ -101,7 +101,7 @@ namespace Lab6
             {
                 Dispatcher.Invoke(() =>
                 {
-                    GuestLabel1.Content = $"Number of guests: {Patron.NumOfGuests}";
+                    GuestLabel1.Content = $"Number of guests: {Patron.CurrentNumOfGuests}";
                     ChairLabel.Content = $"Number of Chairs: {chairs.GetNumOfItems()}";
                     GlassLabel.Content = $"Number of glasses: {glasses.GetNumOfItems()}";
                     pubclosingLabel.Content = $"Pub closing in:";

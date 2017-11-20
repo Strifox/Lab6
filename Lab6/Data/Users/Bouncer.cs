@@ -24,7 +24,7 @@ namespace Lab6
         //Instantiates
         private Random random = new Random();
 
-        
+
         //Delegates
         private Action<string, object> Logtext { get; set; }
 
@@ -36,24 +36,45 @@ namespace Lab6
         //Method to create Patrons and also to stop creating Patrons.
         public void Run(Action<string, object> logText, CancellationToken ct)
         {
+            int patronRandomSleepDuration = random.Next(3, 10);
+
             while (!ct.IsCancellationRequested)
             {
+                while (SimulationSettings.MySimulation().CreateBussLoadOfPatrons) // While-loop to let guests in at half speed rate and after 20 seconds creates 15 patrons
+                {
+                    patronRandomSleepDuration = random.Next(6, 20); // Variable to change sleeping time for generating Patrons
+                    Waiting(patronRandomSleepDuration);
+                    if (Time.CurrentTime == Time.CurrentTime - 20)
+                    {
+                        SimulationSettings.MySimulation().NumOfPatrons = 15;
+                        GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText); // Generates 15 patrons
+                    }
+                    else
+                    {
+                        SimulationSettings.MySimulation().NumOfPatrons = 1;
+                        GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText); //Generates 1 patron
+                    }
+                    if (Time.CurrentTime == 0)
+                        StopBouncer(logText);
+
+                }
                 if (Time.CurrentTime > 0)
                 {
-                    Waiting(random.Next(3000, 10000)); //Creates patron every 3-10 second
-                    GeneratePatrons(SimulationSettings.NumOfPatrons, logText);
+                    Waiting(patronRandomSleepDuration); //Creates patron every 3-10 second
+                    GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText);
                 }
-               
-
                 else if (Time.CurrentTime == 0)
-                {
-                    Logtext = logText;
-                    Logtext?.Invoke($"INKASTAREN HAR SLUTAT SLÄPPA IN GÄSTER", this);
-                    while (Time.CurrentTime == 0)
-                    {
-                        Thread.Sleep(10);
-                    }
-                }
+                    StopBouncer(logText);
+            }
+        }
+
+        private void StopBouncer(Action<string, object> logText)
+        {
+            Logtext = logText;
+            Logtext?.Invoke($"INKASTAREN HAR SLUTAT SLÄPPA IN GÄSTER", this);
+            while (Time.CurrentTime == 0)
+            {
+                Thread.Sleep(10);
             }
         }
 
@@ -63,7 +84,7 @@ namespace Lab6
             {
                 Task.Run(() =>
                 {
-                    Patron p = new Patron(10000, 20000);
+                    Patron p = new Patron(SimulationSettings.MySimulation().MinimumStayDurationPatron, SimulationSettings.MySimulation().MaximumStayDurationPatron);
                     p.RunPatron(logText);
                 });
 

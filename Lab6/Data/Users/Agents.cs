@@ -28,7 +28,7 @@ namespace Lab6
 
         public static void Waiting(int milliseconds)
         {
-                Thread.Sleep(Convert.ToInt32(milliseconds / SpeedModifier));
+                Thread.Sleep(Convert.ToInt32(milliseconds * 1000 / SpeedModifier)); //Sets the millisecond variable to be used as normal seconds.
         }
 
     }

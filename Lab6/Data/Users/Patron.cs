@@ -28,7 +28,7 @@ namespace Lab6
         private static int stayDuration;
 
         private static readonly Random Random = new Random();
-        public static int NumOfGuests;
+        public static int CurrentNumOfGuests; // Ticker to count how many guests have entered and left
 
         // Properties
         public string Name { get; set; }
@@ -79,17 +79,17 @@ namespace Lab6
 
         private void PatronEnters()
         {
-            NumOfGuests++;
+            CurrentNumOfGuests++;
             LogText?.Invoke($"{Name} enters the bar and walks up to the barqueue", this);
-            Waiting(1000);
-            Agents.BarQueue.TryAdd(this);
+            Waiting(1);
+            BarQueue.TryAdd(this);
         }
 
         public void PatronLookingForChair()
         {
-            Waiting(3000);
+            Waiting(3);
             LogText?.Invoke($"{Name} letar efter stol!", this);
-            Waiting(4000);
+            Waiting(4);
         }
 
         private void DrinksBeer()
@@ -105,7 +105,7 @@ namespace Lab6
         {
             LogText($"{Name} leaves the bar!", this);
             MainWindow.chairs.itemQueue.Add(new Chair());
-            NumOfGuests--;
+            CurrentNumOfGuests--;
         }
 
         public Patron(int minTime, int maxTime)

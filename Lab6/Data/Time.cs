@@ -9,7 +9,7 @@ using Label = System.Windows.Controls.Label;
 
 namespace Lab6
 {
-    public static class Time
+    public class Time
     {
         //Property to be used for labels.
         public static int CurrentTime { get; set; }
