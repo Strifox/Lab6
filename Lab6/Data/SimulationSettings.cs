@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 
-namespace Lab6.Data
+namespace Lab6
 {
-    public static class SimulationSettings
+    public class SimulationSettings
     {
         //All numbers are in seconds
 
@@ -18,5 +18,7 @@ namespace Lab6.Data
         //Simulation
         public static int SimulationSpeed = 1000; 
         public static int SimulationTime = 300; // The timer for the pubs opening time.
+
+        public static int NumOfPatrons { get; set; } = 1;
     }
 }

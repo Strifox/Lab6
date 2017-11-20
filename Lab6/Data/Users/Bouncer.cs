@@ -24,6 +24,7 @@ namespace Lab6
         //Instantiates
         private Random random = new Random();
 
+        
         //Delegates
         private Action<string, object> Logtext { get; set; }
 
@@ -40,14 +41,9 @@ namespace Lab6
                 if (Time.CurrentTime > 0)
                 {
                     Waiting(random.Next(3000, 10000)); //Creates patron every 3-10 second
-                    {
-                        Task.Run(() =>
-                        {
-                            Patron p = new Patron(10000, 20000);
-                            p.RunPatron(logText);
-                        });
-                    }
+                    GeneratePatrons(SimulationSettings.NumOfPatrons, logText);
                 }
+               
 
                 else if (Time.CurrentTime == 0)
                 {
@@ -58,6 +54,19 @@ namespace Lab6
                         Thread.Sleep(10);
                     }
                 }
+            }
+        }
+
+        private void GeneratePatrons(int count, Action<string, object> logText)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Task.Run(() =>
+                {
+                    Patron p = new Patron(10000, 20000);
+                    p.RunPatron(logText);
+                });
+
             }
         }
     }
