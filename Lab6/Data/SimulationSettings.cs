@@ -20,17 +20,21 @@ namespace Lab6
         private int simulationSpeed = 1;
         private int simulationTime = 120; // The timer for the pubs opening time
         //Waitress
-        private int collectionDurationWaitress = 10;
-        private int washingDurationWaitress = 12;
-        private int addToShelfDurationWaitress = 3;
+        private int collectionDurationWaitress = 10; //standard = 10
+        private int washingDurationWaitress = 12; //standard = 12
+        private int addToShelfDurationWaitress = 3; //standard = 3
         //Bouncer
-        private int numOfPatrons = 1;
-        private int minimumStayDurationPatron = 10;
-        private int maximumStayDurationPatron = 20;
-        private bool createBussLoadOfPatrons = false; // Creates 15 patrons after 20 seconds if set to true
+        private int numOfPatrons = 1; //standard = 1
+        private bool createBussLoadOfPatrons = false; //standard = false // Creates 15 patrons after 20 seconds if set to true
+        private bool hasBusBeenHere = false; //standard = false
+        //Patron
+        private int minimumDrinkingDuration = 10; //standard = 10
+        private int maximumDrinkingDuration = 20; //standard = 20
+        private int walkToBarDuration = 1; //standard = 1
+        private int findChairDuration = 4; //standard = 4
         //Items
-        private int maxNumOfChairs = 9;
-        private int maxNumOfGlasses = 8;
+        private int maxNumOfGlasses = 8; //standard = 8
+        private int maxNumOfChairs = 9; //standard = 9
         private int maxNumOfUsedGlasses;
 
         //Properties
@@ -40,9 +44,13 @@ namespace Lab6
         public int AddToShelfDurationWaitress { get { return addToShelfDurationWaitress; } set { addToShelfDurationWaitress = value; } }
         //Bouncer
         public int NumOfPatrons { get { return numOfPatrons; } set { numOfPatrons = value; } }
-        public int MinimumStayDurationPatron { get { return minimumStayDurationPatron; } set { minimumStayDurationPatron = value; } }
-        public int MaximumStayDurationPatron { get { return maximumStayDurationPatron; } set { maximumStayDurationPatron = value; } }
         public bool CreateBussLoadOfPatrons { get { return createBussLoadOfPatrons; } set { createBussLoadOfPatrons = value; } }
+        public bool HasBusBeenHere { get { return hasBusBeenHere; } set { hasBusBeenHere = value; } }
+        //Patrons
+        public int MinimumDrinkingDuration { get { return minimumDrinkingDuration; } set { minimumDrinkingDuration = value; } }
+        public int MaximumDrinkingDuration { get { return maximumDrinkingDuration; } set { maximumDrinkingDuration = value; } }
+        public int WalkToBarDuration { get { return walkToBarDuration; } set { walkToBarDuration = value; } }
+        public int FindChairDuration { get { return findChairDuration; } set { findChairDuration = value; } }
         //Items
         public int MaxNumOfChairs { get { return maxNumOfChairs; } set { maxNumOfChairs = value; } }
         public int MaxNumOfGlasses { get { return maxNumOfGlasses; } set { maxNumOfGlasses = value; } }

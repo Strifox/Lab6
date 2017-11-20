@@ -13,10 +13,11 @@ namespace Lab6
     {
         //Property to be used for labels.
         public static int CurrentTime { get; set; }
-
+        public static int BussTimer { get; set; }
         public static void RunTimer(int simulationTime, int simulationSpeed)
         {
             CurrentTime = simulationTime;
+            BussTimer = simulationTime;
 
             //Creating the timer in it's own task. 
             Task.Run(() =>

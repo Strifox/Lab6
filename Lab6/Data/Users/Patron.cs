@@ -25,19 +25,12 @@ namespace Lab6
         private Action<string, object> LogText { get; set; }
 
         // Fields
-        private static int stayDuration;
-
         private static readonly Random Random = new Random();
         public static int CurrentNumOfGuests; // Ticker to count how many guests have entered and left
 
         // Properties
         public string Name { get; set; }
 
-        public static int StayDuration
-        {
-            get { return stayDuration; }
-            set { stayDuration = value; }
-        }
 
         private readonly List<string> NamesList = new List<string>()
         {
@@ -81,7 +74,7 @@ namespace Lab6
         {
             CurrentNumOfGuests++;
             LogText?.Invoke($"{Name} enters the bar and walks up to the barqueue", this);
-            Waiting(1);
+            Waiting(SimulationSettings.MySimulation().WalkToBarDuration);
             BarQueue.TryAdd(this);
         }
 
@@ -89,16 +82,15 @@ namespace Lab6
         {
             Waiting(3);
             LogText?.Invoke($"{Name} letar efter stol!", this);
-            Waiting(4);
+            Waiting(SimulationSettings.MySimulation().FindChairDuration);
         }
 
         private void DrinksBeer()
         {
             LogText($"{Name} sitter ner och dricker öl!", this);
             MainWindow.chairs.itemQueue.Take();
-            Waiting(stayDuration);
+            Waiting(Random.Next(SimulationSettings.MySimulation().MinimumDrinkingDuration, SimulationSettings.MySimulation().MaximumDrinkingDuration));
             MainWindow.usedGlasses.itemQueue.Add(new UsedGlass());
-
         }
 
         private void PatronLeaves()
@@ -108,10 +100,9 @@ namespace Lab6
             CurrentNumOfGuests--;
         }
 
-        public Patron(int minTime, int maxTime)
+        public Patron()
         {
             Name = NamesList[Random.Next(NamesList.Count)];
-            stayDuration = Random.Next(minTime, maxTime);
         }
     }
 

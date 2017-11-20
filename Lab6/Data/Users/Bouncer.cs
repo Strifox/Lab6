@@ -21,9 +21,8 @@ namespace Lab6
 {
     public class Bouncer : Agents
     {
-        //Instantiates
+        //Instances
         private Random random = new Random();
-
 
         //Delegates
         private Action<string, object> Logtext { get; set; }
@@ -44,10 +43,11 @@ namespace Lab6
                 {
                     patronRandomSleepDuration = random.Next(6, 20); // Variable to change sleeping time for generating Patrons
                     Waiting(patronRandomSleepDuration);
-                    if (Time.CurrentTime == Time.CurrentTime - 20)
+                    if (Time.CurrentTime <= Time.BussTimer - 20 && !SimulationSettings.MySimulation().HasBusBeenHere)
                     {
                         SimulationSettings.MySimulation().NumOfPatrons = 15;
                         GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText); // Generates 15 patrons
+                        SimulationSettings.MySimulation().HasBusBeenHere = true;
                     }
                     else
                     {
@@ -84,7 +84,7 @@ namespace Lab6
             {
                 Task.Run(() =>
                 {
-                    Patron p = new Patron(SimulationSettings.MySimulation().MinimumStayDurationPatron, SimulationSettings.MySimulation().MaximumStayDurationPatron);
+                    Patron p = new Patron();
                     p.RunPatron(logText);
                 });
 
