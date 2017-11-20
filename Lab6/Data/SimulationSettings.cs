@@ -9,10 +9,17 @@ namespace Lab6
 {
     public class SimulationSettings
     {
+        //Singleton Design Pattern
         private SimulationSettings()
         {
 
         }
+        private static SimulationSettings instance = new SimulationSettings();
+        public static SimulationSettings MySimulation()
+        {
+            return instance;
+        }
+
         // All Property numbers are in seconds
 
         //Private Fields
@@ -58,14 +65,5 @@ namespace Lab6
         //Time
         public int SimulationSpeed { get { return simulationSpeed; } set { simulationSpeed = value; } }
         public int SimulationTime { get { return simulationTime; } set { simulationTime = value; } }
-
-
-        private static SimulationSettings instance = new SimulationSettings();
-
-        public static SimulationSettings MySimulation()
-        {
-            return instance;
-        }
-
     }
 }

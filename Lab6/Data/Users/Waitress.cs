@@ -26,6 +26,7 @@ namespace Lab6
         private int WashingDuration { get; set; } //The time it takes to clean the glasses
         private int AddToShelfDuration { get; set; } //The time it takes to add glasses to the shelf
 
+
         public void Handling(Items<UsedGlass> usedGlasses, Items<Glass> glasses, Items<Chair> chairs, Action<string, object> updateListBox, CancellationToken ct)
         {
             while (!ct.IsCancellationRequested)
