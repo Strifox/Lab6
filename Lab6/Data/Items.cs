@@ -37,6 +37,6 @@ namespace Lab6
 
     public class Glass { public static int maxNumOfGlasses = 8; }
 
-    public class UsedGlass { public static int maxNumOfUsedGlasses; }
+    public class UsedGlass { public static int maxNumOfUsedGlasses;}
 }
 

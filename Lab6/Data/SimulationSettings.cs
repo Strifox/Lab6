@@ -20,7 +20,7 @@ namespace Lab6
         public static int SimulationSpeed { get; set; } = 1000;
         public static int SimulationTime { get; set; } = 300; // The timer for the pubs opening time
 
-        public static int NumOfPatrons { get; set; } = 1;
+        public static int NumOfPatrons { get; set; } = 10;
 
     }
 }
