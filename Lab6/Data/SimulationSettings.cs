@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 
-namespace Lab6.Data
+namespace Lab6
 {
-    public static class SimulationSettings
+    public class SimulationSettings
     {
         // Numbers are in milliseconds except for SimulationTime (seconds)
 

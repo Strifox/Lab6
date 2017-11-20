@@ -17,7 +17,7 @@ namespace Lab6
         {
             for (int i = 0; i < count; i++)
             {
-                itemQueue.Add(item);
+                itemQueue.Add(new T());
             }
         }
 
