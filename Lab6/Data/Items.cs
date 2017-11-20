@@ -17,7 +17,7 @@ namespace Lab6
         {
             for (int i = 0; i < count; i++)
             {
-                itemQueue.Add(item);
+                itemQueue.Add(new T());
             }
         }
 
@@ -33,9 +33,9 @@ namespace Lab6
 
         public Items() { item = new T(); }
     }
-    public class Chair { public int maxNumOfChairs = 9; }
+    public class Chair { public int maxNumOfChairs = 3; }
 
-    public class Glass { public int maxNumOfGlasses = 8; }
+    public class Glass { public int maxNumOfGlasses = 20; }
 
     public class UsedGlass { public int maxNumOfUsedGlasses; }
 }

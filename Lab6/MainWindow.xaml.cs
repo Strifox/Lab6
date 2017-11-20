@@ -77,7 +77,6 @@ namespace Lab6
                 UpdateLabels();
             });
         }
-
       
         private void AddList(string action, object sender)
         {
@@ -116,7 +115,6 @@ namespace Lab6
                 });
                 Thread.Sleep(10);
             }
-        
 
             Dispatcher.Invoke(() =>
             {
