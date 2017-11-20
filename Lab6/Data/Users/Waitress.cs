@@ -30,7 +30,6 @@ namespace Lab6
         {
             while (!ct.IsCancellationRequested)
             {
-                // 9 glas, 8 chairs   10 sec hämta glas, 15 diska
                 if (usedGlasses.itemQueue.Count > 0)
                 {
                     updateListBox("Plockar tomma glas", this);
@@ -45,21 +44,17 @@ namespace Lab6
                         glasses.itemQueue.Add(new Glass());
                     }
                 }
-
-                else
+                if (Time.CurrentTime == 0 && Patron.NumOfGuests == 0 && usedGlasses.itemQueue.Count == 0)
+                {
+                    updateListBox("Allt är rent, Puben stängs och servitrisen går hem", this);
+                    while (Time.CurrentTime == 0 && Patron.NumOfGuests == 0)
+                        Thread.Sleep(100);
+                }
+                if (usedGlasses.itemQueue.Count == 0)
                 {
                     updateListBox("Väntar på disk", this);
                     while (!usedGlasses.itemQueue.Any())
                         Thread.Sleep(100);
-                }
-
-                if (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 && Time.CurrentTime == 0)
-                {
-                    updateListBox("Alla glasen är rena och alla gäster har gått, servitrisen går nu hem", this);
-                    while (ChairQueue.Count == chairs.item.maxNumOfChairs && usedGlasses.itemQueue.Count == 0 && Time.CurrentTime == 0)
-                    {
-                        Thread.Sleep(100);
-                    }
                 }
             }
         }

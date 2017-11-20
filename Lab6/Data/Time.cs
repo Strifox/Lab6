@@ -14,18 +14,17 @@ namespace Lab6
         //Property to be used for labels.
         public static int CurrentTime { get; set; }
 
-        public static void RunTimer(int runTime)
+        public static void RunTimer(int simulationTime, int simulationSpeed)
         {
-            CurrentTime = runTime;
+            CurrentTime = simulationTime;
 
             //Creating the timer in it's own task. 
             Task.Run(() =>
             {
                 while (CurrentTime > 0)
                 {
-                    Thread.Sleep(1000); // sleep method to make the property CurrentTime tick once a second.
+                    Agents.Waiting(simulationSpeed); // Simulation modifier used to change timer speed.
                     CurrentTime--;
-
                 }
             });
         }
