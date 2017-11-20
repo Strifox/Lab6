@@ -9,14 +9,16 @@ namespace Lab6.Data
 {
     public static class SimulationSettings
     {
-        //All numbers are in seconds
+        // Numbers are in milliseconds except for SimulationTime (seconds)
 
-        //Waitress
-        public static int CollectionDuration = 10000;
-        public static int WashingDuration = 12000;
-        public static int AddToShelfDuration = 3000;
-        //Simulation
-        public static int SimulationSpeed = 1000; 
-        public static int SimulationTime = 300; // The timer for the pubs opening time.
+        //Properties for Waitress class
+        public static int CollectionDuration { get; set; } = 10000;
+        public static int WashingDuration { get; set; } = 12000;
+        public static int AddToShelfDuration { get; set; } = 3000;
+
+        //Properties for Time class
+        public static int SimulationSpeed { get; set; } = 1000;
+        public static int SimulationTime { get; set; } = 300; // The timer for the pubs opening time
+
     }
 }
