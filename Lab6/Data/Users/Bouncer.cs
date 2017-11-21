@@ -52,7 +52,7 @@ namespace Lab6
                     else
                     {
                         SimulationSettings.MySimulation().NumOfPatrons = 1;
-                        GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText); //Generates 1 patron
+                        GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText); //Generates 1 patron if bool CreateBussLoadOfPAtrons is true
                     }
                     if (Time.CurrentTime == 0)
                         StopBouncer(logText);
@@ -60,8 +60,8 @@ namespace Lab6
                 }
                 if (Time.CurrentTime > 0)
                 {
-                    Waiting(patronRandomSleepDuration); //Creates patron every 3-10 second
-                    GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText);
+                    Waiting(patronRandomSleepDuration); //Sleeping time for generating patrons
+                    GeneratePatrons(SimulationSettings.MySimulation().NumOfPatrons, logText); // Generates 1 patron
                 }
                 else if (Time.CurrentTime == 0)
                     StopBouncer(logText);
